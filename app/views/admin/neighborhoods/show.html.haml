@@ -6,13 +6,7 @@
 = content_tag "div", id: "map", data: {blocks: @map_hash} do
   Loading map...
 
-.row
-  %h4 
-    .col-md-12
-      ="#{@neighborhood.name} has #{@blocks.count} blocks."
-
-    
-
+=render partial: 'updates'
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
 
@@ -51,7 +45,7 @@
         path: block_lines[i]['polyline'],
         geodesic: true,
         strokeColor: block_lines[i]['color'],
-        strokeOpacity: .5,
+        strokeOpacity: .6,
         strokeWeight: 8
       });
 

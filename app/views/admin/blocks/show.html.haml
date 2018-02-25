@@ -11,6 +11,13 @@
     Cleanings
   %div.text-center
     Add a Cleaning
+  %div.row
+    .col-md-3
+    .col-md-6
+      =simple_form_for @cleaning, url: admin_cleanings_path do |f|
+        =f.input :note
+        = f.input :block_id, :as => :hidden, :input_html => { :value => @block.id }
+        =f.button :submit 
   .col-md-3
   .col-md-6
     -@block.cleanings.order(time: :desc).each do |cleaning|
