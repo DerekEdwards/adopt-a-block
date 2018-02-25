@@ -3,13 +3,22 @@
 %h3
   =@neighborhood.description
 
-//%div#map{data: {poly: @poly1}}
-= content_tag "div", id: "map", data: {blocks: @blocks} do
-  Loading products...
+= content_tag "div", id: "map", data: {blocks: @map_hash} do
+  Loading map...
 
 .row
-  .col-md-12
-    What is the problem?
+  -@blocks.each do |block|
+    .row
+      .col-md-1
+      .col-md-10
+        .well
+          .col-md-3
+            =block.name
+          .col-md-5
+            =block.description
+          .col-md-4
+            ="Last Cleaned: #{block.last_cleaned}"
+    
 
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
@@ -18,7 +27,7 @@
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
   #map {
-    height: 50%;
+    height: 65%;
   }
   /* Optional: Makes the sample page fill the window. */
   html, body {
@@ -43,11 +52,21 @@
 
     for(var i = 0; i < block_lines.length; i++){
       var new_line = new google.maps.Polyline({
-        path: block_lines[i],
+        path: block_lines[i]['polyline'],
         geodesic: true,
-        strokeColor: '#FF0000',
+        strokeColor: block_lines[i]['color'],
         strokeOpacity: .5,
         strokeWeight: 8
+      });
+
+      var infowindow = new google.maps.InfoWindow({
+        content: block_lines[i]['color']
+      });
+
+      new_line.addListener('click', function(clickEvent) {
+        var position = clickEvent.latLng;
+        infowindow.setPosition(position);
+        infowindow.open(map);
       });
 
       new_line.setMap(map);

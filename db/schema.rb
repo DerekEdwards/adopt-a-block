@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225030542) do
+ActiveRecord::Schema.define(version: 20180225131949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20180225030542) do
     t.bigint "neighborhood_id"
     t.text "polyline"
     t.index ["neighborhood_id"], name: "index_blocks_on_neighborhood_id"
+  end
+
+  create_table "cleanings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "block_id"
+    t.datetime "time"
+    t.text "note"
+    t.index ["block_id"], name: "index_cleanings_on_block_id"
   end
 
   create_table "configs", force: :cascade do |t|
@@ -40,4 +49,5 @@ ActiveRecord::Schema.define(version: 20180225030542) do
   end
 
   add_foreign_key "blocks", "neighborhoods"
+  add_foreign_key "cleanings", "blocks"
 end
