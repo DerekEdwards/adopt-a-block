@@ -1,0 +1,69 @@
+%h1
+  =@block.name
+%h3
+  =@block.description
+
+= content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.center} do
+  Loading map...
+
+.row.text-center
+  %h2
+    Cleanings
+  %div.text-center
+    Add a Cleaning
+  .col-md-3
+  .col-md-6
+    -@block.cleanings.order(time: :desc).each do |cleaning|
+      %hr
+      .row
+        =cleaning.time.strftime("%a %b %e, %Y")
+      .row
+        =cleaning.note
+
+
+%meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
+
+:css
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 30%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+:javascript
+  // This example creates a 2-pixel-wide red polyline showing the path of
+  // the first trans-Pacific flight between Oakland, CA, and Brisbane,
+  // Australia which was made by Charles Kingsford Smith.
+
+  function initMap() {
+    var polyline = $('#map').data('polyline');
+    var color = $('#map').data('color');
+    var center = $('#map').data('center');
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 17,
+      center: center,
+      mapTypeId: 'roadmap'
+    });
+
+
+    var new_line = new google.maps.Polyline({
+      path: polyline,
+      geodesic: true,
+      strokeColor: color,
+      strokeOpacity: .5,
+      strokeWeight: 8
+    });
+
+    new_line.setMap(map);
+
+  }
+
+%script{async: "", defer: "defer", src: "https://maps.googleapis.com/maps/api/js?key=#{Config.google_maps_api_key}&callback=initMap"}
+  :cdata
