@@ -38,6 +38,8 @@ gem 'jbuilder', '~> 2.5'
 ### VIEWS & FORMATTING #####################
 gem 'awesome_print'
 gem 'haml-rails'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'jquery-rails'
 ############################################
 
 group :development, :test do

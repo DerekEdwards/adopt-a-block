@@ -1,10 +1,24 @@
-#map
+%h1
+  =@neighborhood.name
+%h3
+  =@neighborhood.description
+
+//%div#map{data: {poly: @poly1}}
+= content_tag "div", id: "map", data: {blocks: @blocks} do
+  Loading products...
+
+.row
+  .col-md-12
+    What is the problem?
+
+
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
+
 :css
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
   #map {
-    height: 100%;
+    height: 50%;
   }
   /* Optional: Makes the sample page fill the window. */
   html, body {
@@ -12,6 +26,7 @@
     margin: 0;
     padding: 0;
   }
+
 :javascript
   // This example creates a 2-pixel-wide red polyline showing the path of
   // the first trans-Pacific flight between Oakland, CA, and Brisbane,
@@ -19,26 +34,26 @@
 
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 3,
-      center: {lat: 0, lng: -180},
-      mapTypeId: 'terrain'
+      zoom: 17,
+      center: {lat: 42.366939, lng: -71.034349},
+      mapTypeId: 'roadmap'
     });
 
-    var flightPlanCoordinates = [
-      {lat: 37.772, lng: -122.214},
-      {lat: 21.291, lng: -157.821},
-      {lat: -18.142, lng: 178.431},
-      {lat: -27.467, lng: 153.027}
-    ];
-    var flightPath = new google.maps.Polyline({
-      path: flightPlanCoordinates,
-      geodesic: true,
-      strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-    });
+    var block_lines = $('#map').data('blocks');
 
-    flightPath.setMap(map);
+    for(var i = 0; i < block_lines.length; i++){
+      var new_line = new google.maps.Polyline({
+        path: block_lines[i],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: .5,
+        strokeWeight: 8
+      });
+
+      new_line.setMap(map);
+    }
+
+      
   }
 %script{async: "", defer: "defer", src: "https://maps.googleapis.com/maps/api/js?key=#{Config.google_maps_api_key}&callback=initMap"}
   :cdata
