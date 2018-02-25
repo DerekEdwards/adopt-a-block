@@ -3,21 +3,18 @@
 %h3
   =@block.description
 
+
+
 = content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.center} do
   Loading map...
 
 .row.text-center
   %h2
     Cleanings
-  %div.text-center
-    Add a Cleaning
-  %div.row
-    .col-md-3
-    .col-md-6
-      =simple_form_for @cleaning, url: admin_cleanings_path do |f|
-        =f.input :note
-        = f.input :block_id, :as => :hidden, :input_html => { :value => @block.id }
-        =f.button :submit 
+  .row
+  .col-md-12
+    =render partial: 'clean_modal'
+    %button.btn.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} This Block is Clean
   .col-md-3
   .col-md-6
     -@block.cleanings.order(time: :desc).each do |cleaning|

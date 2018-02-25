@@ -1,0 +1,16 @@
+/ Modal
+#myModal.modal.fade{role: "dialog"}
+  .modal-dialog
+    / Modal content
+    .modal-content
+      =simple_form_for @cleaning, url: admin_cleanings_path do |f|
+        .modal-header
+          %button.close{"data-dismiss" => "modal", type: "button"} ×
+          %h4.modal-title Awesome!
+        .modal-body
+          %p Leave a note about this block (optional)
+          =f.input :note, label: false
+          =f.input :block_id, :as => :hidden, :input_html => { :value => @block.id }
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
+          =f.button :submit, "Mark Block as Clean", class: 'btn-info'
