@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :neighborhoods, :only => [:show]
+    resources :blocks, :only => [:show]
   end
 end

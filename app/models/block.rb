@@ -34,7 +34,6 @@ class Block < ApplicationRecord
     end
   end
 
-
   def color
     lc = last_cleaned
     if lc.nil?
@@ -51,6 +50,26 @@ class Block < ApplicationRecord
   end
 
   def content
-    "<strong>#{name}</strong><br>#{description}<br>#{days_since_cleaned}"
+    puts 
+    "<strong><a href=#{Rails.application.routes.url_helpers.admin_block_path(self)} target='_blank'>#{name}</a></strong>
+     <br>#{description}
+     <br>#{days_since_cleaned}"
   end
+
+  def center
+    if polyline.blank?
+      return {lat: 0, lng: 0}
+    end
+
+    lat = 0.0
+    lng = 0.0
+
+    polyline.each do |point|
+      lat += point[:lat].to_f
+      lng += point[:lng].to_f
+    end
+
+    return {lat: lat/polyline.count, lng: lng/polyline.count}
+  end
+
 end

@@ -40,6 +40,7 @@ gem 'awesome_print'
 gem 'haml-rails'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
+gem 'simple_form'
 ############################################
 
 group :development, :test do
