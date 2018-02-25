@@ -11,13 +11,29 @@ class Block < ApplicationRecord
 
 
   def last_cleaning
-     self.cleanings.order('time').last
+     cleanings.order('time').last
   end
 
   def last_cleaned
     lc = last_cleaning
     lc.nil? ? nil : lc.time
   end
+
+  def days_since_cleaned
+    lc = last_cleaned
+    if lc.nil?
+      return "Never cleaned."
+    end
+    days = (Time.now.to_date - lc.to_date).to_i
+    if days == 0
+      return "Cleaned today"
+    elsif days == 1
+      return "Cleaned yesterday"
+    else
+      return "Last cleaned #{days} days ago"
+    end
+  end
+
 
   def color
     lc = last_cleaned
@@ -32,5 +48,9 @@ class Block < ApplicationRecord
     else
       return "#FF0000"
     end
+  end
+
+  def content
+    "<strong>#{name}</strong><br>#{description}<br>#{days_since_cleaned}"
   end
 end

@@ -7,17 +7,10 @@
   Loading map...
 
 .row
-  -@blocks.each do |block|
-    .row
-      .col-md-1
-      .col-md-10
-        .well
-          .col-md-3
-            =block.name
-          .col-md-5
-            =block.description
-          .col-md-4
-            ="Last Cleaned: #{block.last_cleaned}"
+  %h4 
+    .col-md-12
+      ="#{@neighborhood.name} has #{@blocks.count} blocks."
+
     
 
 
@@ -50,8 +43,11 @@
 
     var block_lines = $('#map').data('blocks');
 
+    var contents = [];
+
     for(var i = 0; i < block_lines.length; i++){
       var new_line = new google.maps.Polyline({
+        id: i,
         path: block_lines[i]['polyline'],
         geodesic: true,
         strokeColor: block_lines[i]['color'],
@@ -59,12 +55,13 @@
         strokeWeight: 8
       });
 
-      var infowindow = new google.maps.InfoWindow({
-        content: block_lines[i]['color']
-      });
+      infowindow = new google.maps.InfoWindow();
+      contents[i] = block_lines[i]['content'];
+
 
       new_line.addListener('click', function(clickEvent) {
         var position = clickEvent.latLng;
+        infowindow.setContent(contents[this.id]);
         infowindow.setPosition(position);
         infowindow.open(map);
       });
