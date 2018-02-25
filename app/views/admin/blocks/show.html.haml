@@ -14,7 +14,7 @@
   .row
   .col-md-12
     =render partial: 'clean_modal'
-    %button.btn.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} This Block is Clean
+    %button.btn.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block Today
   .col-md-3
   .col-md-6
     -@block.cleanings.order(time: :desc).each do |cleaning|
