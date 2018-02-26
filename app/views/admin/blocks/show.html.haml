@@ -2,6 +2,15 @@
   =@block.name
 %h3.text-center
   =@block.description
+-if @block.user
+  %h5.text-center
+    ="This block has been adopted by "
+    =mail_to @block.user.email,  "#{@block.user.name}"
+-else
+  %h5.text-center
+    ="Contact "
+    =mail_to 'dedwards8@gmail.com', "Derek Edwards"
+    ="to adopt this block."
 
 .row
   .col-md-12.text-center

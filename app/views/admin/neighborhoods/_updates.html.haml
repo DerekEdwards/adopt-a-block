@@ -4,13 +4,11 @@
       ="#{@neighborhood.name} has #{@blocks.count} blocks."  
     %h4.text-center
       ="These #{@blocks.count} blocks have been cleaned #{@neighborhood.cleanings.count} times."
+
 .row
-  .col-md-12
+  .col-md-6
     %h2.text-center
       Recent Activity
-.row
-  .col-md-3
-  .col-md-6
     -@neighborhood.cleanings.order(time: :desc).limit(10).each do |cleaning|
       %h4.text-center
         =link_to admin_block_path(cleaning.block) do 
@@ -19,5 +17,19 @@
       .text-center
         =cleaning.note
       %hr
+  .col-md-6
+
+    %h2.text-center Available Blocks
+    -@neighborhood.blocks.orphaned.each do |block|
+      .row.text-center
+        =link_to admin_block_path(block) do 
+          =block.name
+
+    %h2.text-center Adopted Blocks
+    -@neighborhood.blocks.adopted.each do |block|
+      .row.text-center
+        =link_to admin_block_path(block) do
+          =block.name
+
 
        
