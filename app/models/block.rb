@@ -2,8 +2,12 @@ class Block < ApplicationRecord
 
   belongs_to :neighborhood
   has_many :cleanings
+  belongs_to :user
 
   serialize :polyline
+
+  scope :adopted, ->{ where.not(user_id: nil) }
+  scope :orphaned, ->{ where(user_id: nil) }
 
   def clean note=nil, time=Time.now
     Cleaning.create(block: self, time: time, note: note)
