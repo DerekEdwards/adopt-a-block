@@ -9,7 +9,8 @@
     %h2.text-center
       Recent Activity
 .row
-  .col-md-12
+  .col-md-3
+  .col-md-6
     -@neighborhood.cleanings.order(time: :desc).limit(10).each do |cleaning|
       %h4.text-center
         =link_to admin_block_path(cleaning.block) do 
