@@ -1,6 +1,6 @@
-%h1
+%h1.text-center
   =@neighborhood.name
-%h3
+%h3.text-center
   =@neighborhood.description
 
 = content_tag "div", id: "map", data: {blocks: @map_hash} do

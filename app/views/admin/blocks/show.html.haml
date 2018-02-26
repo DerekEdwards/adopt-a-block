@@ -1,26 +1,26 @@
-%h1
+%h1.text-center
   =@block.name
-%h3
+%h3.text-center
   =@block.description
 
-
+.row
+  .col-md-12.text-center
+    =render partial: 'clean_modal'
+    %button.btn.btn-sm.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block Today
+%br
 
 = content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.center} do
   Loading map...
 
 .row.text-center
   %h2
-    Cleanings
-  .row
-  .col-md-12
-    =render partial: 'clean_modal'
-    %button.btn.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block Today
+    Activity on this Block
   .col-md-3
   .col-md-6
     -@block.cleanings.order(time: :desc).each do |cleaning|
       %hr
-      .row
-        =cleaning.time.strftime("%a %b %e, %Y")
+      %h4
+        ="Block cleaned on #{cleaning.time.strftime("%a %b %e, %Y")}"
       .row
         =cleaning.note
 

@@ -1,19 +1,22 @@
-.row
+.row.text-center
   .col-md-12
-    %h4
+    %h4.text-center
       ="#{@neighborhood.name} has #{@blocks.count} blocks."  
-    %h4
+    %h4.text-center
       ="These #{@blocks.count} blocks have been cleaned #{@neighborhood.cleanings.count} times."
 .row
   .col-md-12
-    %h2
+    %h2.text-center
       Recent Activity
 .row
   .col-md-12
     -@neighborhood.cleanings.order(time: :desc).limit(10).each do |cleaning|
-      %h4
-        ="#{cleaning.block.name} was #{cleaning.block.days_since_cleaned.downcase}."
-      =cleaning.note
+      %h4.text-center
+        =link_to admin_block_path(cleaning.block) do 
+          =cleaning.block.name
+        ="was #{cleaning.block.days_since_cleaned.downcase}."
+      .text-center
+        =cleaning.note
       %hr
 
        

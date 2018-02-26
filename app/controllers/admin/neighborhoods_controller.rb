@@ -6,4 +6,8 @@ class Admin::NeighborhoodsController < ApplicationController
     @map_hash = @neighborhood.map_hash
   end 
 
+  def index
+    @neighborhoods = Neighborhood.all
+  end
+
 end
