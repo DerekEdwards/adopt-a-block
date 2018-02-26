@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    %h4
+      ="#{@neighborhood.name} has #{@blocks.count} blocks."  
+    %h4
+      ="These #{@blocks.count} blocks have been cleaned #{@neighborhood.cleanings.count} times."
+.row
+  .col-md-12
+    %h2
+      Recent Activity
+.row
+  .col-md-12
+    -@neighborhood.cleanings.order(time: :desc).limit(10).each do |cleaning|
+      %h4
+        ="#{cleaning.block.name} was #{cleaning.block.days_since_cleaned.downcase}."
+      =cleaning.note
+      %hr
+
+       

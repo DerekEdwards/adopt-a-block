@@ -3,14 +3,10 @@
 %h3
   =@neighborhood.description
 
-//%div#map{data: {poly: @poly1}}
-= content_tag "div", id: "map", data: {blocks: @blocks} do
-  Loading products...
+= content_tag "div", id: "map", data: {blocks: @map_hash} do
+  Loading map...
 
-.row
-  .col-md-12
-    What is the problem?
-
+=render partial: 'updates'
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
 
@@ -18,7 +14,7 @@
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
   #map {
-    height: 50%;
+    height: 65%;
   }
   /* Optional: Makes the sample page fill the window. */
   html, body {
@@ -35,19 +31,33 @@
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
-      center: {lat: 42.366939, lng: -71.034349},
+      center: {lat: 42.367735, lng: -71.035241},
       mapTypeId: 'roadmap'
     });
 
     var block_lines = $('#map').data('blocks');
 
+    var contents = [];
+
     for(var i = 0; i < block_lines.length; i++){
       var new_line = new google.maps.Polyline({
-        path: block_lines[i],
+        id: i,
+        path: block_lines[i]['polyline'],
         geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: .5,
+        strokeColor: block_lines[i]['color'],
+        strokeOpacity: .6,
         strokeWeight: 8
+      });
+
+      infowindow = new google.maps.InfoWindow();
+      contents[i] = block_lines[i]['content'];
+
+
+      new_line.addListener('click', function(clickEvent) {
+        var position = clickEvent.latLng;
+        infowindow.setContent(contents[this.id]);
+        infowindow.setPosition(position);
+        infowindow.open(map);
       });
 
       new_line.setMap(map);
