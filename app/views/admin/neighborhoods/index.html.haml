@@ -1,0 +1,11 @@
+%h1.text-center
+  All Neighborhoods
+
+-@neighborhoods.each do |neighborhood|
+  .row.text-center
+    .col-md-12
+      %h2
+        =link_to admin_neighborhood_path(neighborhood) do 
+          =neighborhood.name
+      %h4
+        =neighborhood.description
