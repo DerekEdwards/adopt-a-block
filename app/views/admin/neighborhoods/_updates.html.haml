@@ -13,7 +13,7 @@
       %h4.text-center
         =link_to admin_block_path(cleaning.block) do 
           =cleaning.block.name
-        ="was #{cleaning.block.days_since_cleaned.downcase}."
+        ="was #{cleaning.days_since_cleaned.downcase}."
       .text-center
         =cleaning.note
       %hr

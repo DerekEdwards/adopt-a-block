@@ -24,18 +24,11 @@ class Block < ApplicationRecord
   end
 
   def days_since_cleaned
-    lc = last_cleaned
+    lc = last_cleaning
     if lc.nil?
       return "Never cleaned."
     end
-    days = (Time.now.to_date - lc.to_date).to_i
-    if days == 0
-      return "Cleaned today"
-    elsif days == 1
-      return "Cleaned yesterday"
-    else
-      return "Last cleaned #{days} days ago"
-    end
+    return lc.days_since_cleaned
   end
 
   def color
