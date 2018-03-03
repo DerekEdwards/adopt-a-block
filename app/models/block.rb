@@ -48,7 +48,7 @@ class Block < ApplicationRecord
 
   def content
     puts 
-    "<strong><a href=#{Rails.application.routes.url_helpers.admin_block_path(self)} target='_blank'>#{name}</a></strong>
+    "<strong><a href=#{Rails.application.routes.url_helpers.admin_block_path(self)}>#{name}</a></strong>
      <br>#{description}
      <br>#{days_since_cleaned}"
   end
