@@ -24,14 +24,23 @@
 .row.text-center
   %h2
     Activity on this Block
-  .col-md-3
-  .col-md-6
+  .col-md-1
+  .col-md-10
     -@block.cleanings.order(time: :desc).each do |cleaning|
       %hr
       %h4
         ="Block cleaned on #{cleaning.time.strftime("%a %b %e, %Y")}"
       .row
-        =cleaning.note
+        .col-md-3
+        .col-md-6
+          =cleaning.note
+      -if not cleaning.before_photo.url.nil? and not cleaning.after_photo.url.nil?
+        .row
+          .col-md-6
+            =image_tag cleaning.before_photo.url
+          .col-md-6
+            =image_tag cleaning.before_photo.url
+
 
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/

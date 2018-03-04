@@ -10,7 +10,8 @@
         .modal-body
           %p Leave a note about this block (optional)
           =f.input :note, label: false
-          =f.input_field :photo, class: "form-control file optional", type: "file"
+          =f.input :before_photo, as: :file
+          =f.input :after_photo, as: :file
           =f.input :block_id, as: :hidden, input_html: { :value => @block.id }
 
         .modal-footer

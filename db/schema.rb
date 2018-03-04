@@ -33,7 +33,8 @@ ActiveRecord::Schema.define(version: 20180303224930) do
     t.bigint "block_id"
     t.datetime "time"
     t.text "note"
-    t.string "photo"
+    t.string "before_photo"
+    t.string "after_photo"
     t.index ["block_id"], name: "index_cleanings_on_block_id"
   end
 

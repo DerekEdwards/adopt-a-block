@@ -11,7 +11,7 @@ class Admin::CleaningsController < ApplicationController
   private
 
   def cleaning_params
-    params.require(:cleaning).permit(:note, :block_id, :photo)
+    params.require(:cleaning).permit(:note, :block_id, :before_photo, :after_photo)
   end
 
 end
