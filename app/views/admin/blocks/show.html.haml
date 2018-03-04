@@ -24,15 +24,18 @@
 .row.text-center
   %h2
     Activity on this Block
-  .col-md-3
-  .col-md-6
+  .col-md-1
+  .col-md-10
     -@block.cleanings.order(time: :desc).each do |cleaning|
       %hr
       %h4
         ="Block cleaned on #{cleaning.time.strftime("%a %b %e, %Y")}"
       .row
-        =cleaning.note
+        .col-md-3
+        .col-md-6
+          =cleaning.note
 
+      =render partial: 'cleaning_photos', locals: {cleaning: cleaning}
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
 
@@ -40,7 +43,7 @@
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
   #map {
-    height: 30%;
+    height: 40%;
   }
   /* Optional: Makes the sample page fill the window. */
   html, body {

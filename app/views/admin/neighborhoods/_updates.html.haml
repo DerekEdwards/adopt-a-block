@@ -16,6 +16,8 @@
         ="was #{cleaning.days_since_cleaned.downcase}."
       .text-center
         =cleaning.note
+        =link_to admin_block_path(cleaning.block) do 
+          =render partial: 'admin/blocks/cleaning_photos', locals: {cleaning: cleaning}
       %hr
   .col-md-6
 

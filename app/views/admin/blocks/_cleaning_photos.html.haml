@@ -1,0 +1,22 @@
+-if not cleaning.before_photo.url.nil? and not cleaning.after_photo.url.nil?
+  .row
+    .col-md-6.cleaning-big
+      .overlay-text
+        Before
+      =image_tag cleaning.before_photo.url
+    .col-md-6.cleaning-big
+      .overlay-text
+        After
+      =image_tag cleaning.before_photo.url 
+-elsif not cleaning.before_photo.url.nil? 
+  .row
+    .col-md-12.cleaning-big
+      .overlay-text
+        Before
+      =image_tag cleaning.before_photo.url
+-elsif not cleaning.after_photo.url.nil?
+  .row
+    .col-md-12.cleaning-big
+      .overlay-text
+        After
+      =image_tag cleaning.after_photo.url
