@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180226014559) do
+ActiveRecord::Schema.define(version: 20180303224930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180226014559) do
     t.bigint "block_id"
     t.datetime "time"
     t.text "note"
+    t.string "photo"
     t.index ["block_id"], name: "index_cleanings_on_block_id"
   end
 

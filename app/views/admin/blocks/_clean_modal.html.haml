@@ -10,7 +10,9 @@
         .modal-body
           %p Leave a note about this block (optional)
           =f.input :note, label: false
-          =f.input :block_id, :as => :hidden, :input_html => { :value => @block.id }
+          =f.input_field :photo, class: "form-control file optional", type: "file"
+          =f.input :block_id, as: :hidden, input_html: { :value => @block.id }
+
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
           =f.button :submit, "Mark Block as Clean", class: 'btn-info'
