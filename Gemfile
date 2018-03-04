@@ -49,8 +49,8 @@ gem 'devise'
 ############################################
 
 ### Image Uploading ########################
-gem 'carrierwave', '~> 1.0' #For Uploading
-gem "fog-aws"
+gem 'carrierwave', '~> 1.2' #For Uploading
+gem "fog"
 ############################################
 
 group :development, :test do
