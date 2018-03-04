@@ -12,7 +12,13 @@
     <!-- NAV MENU -->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <a class="navbar-brand" href=<%= root_path %>>AdoptABlock</a>
+        <% if @block %>
+          <a href=<%= root_path%>><i class="navbar-brand fa fa-home"></i></a>
+          <a class="navbar-brand" href=<%= admin_neighborhood_path(@block.neighborhood)%>> <%=@block.neighborhood.name%> </a>
+        <% else %>
+          <a href=<%= root_path%>><i class="navbar-brand fa fa-home"></i></a>
+        <% end %>
+
       </div><!-- /.container-fluid -->
     </nav>
     <!-- NAV MENU -->
