@@ -49,7 +49,6 @@ gem 'devise'
 
 ### Image Uploading ########################
 gem 'carrierwave', '~> 1.0' #For Uploading
-gem 'mini_magick' # For Resizing
 ############################################
 
 group :development, :test do

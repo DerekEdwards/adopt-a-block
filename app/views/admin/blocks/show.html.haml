@@ -34,14 +34,8 @@
         .col-md-3
         .col-md-6
           =cleaning.note
-      -if not cleaning.before_photo.url.nil? and not cleaning.after_photo.url.nil?
-        .row
-          .col-md-6
-            =image_tag cleaning.before_photo.url
-          .col-md-6
-            =image_tag cleaning.before_photo.url
 
-
+      =render partial: 'cleaning_photos', locals: {cleaning: cleaning}
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
 
@@ -49,7 +43,7 @@
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
   #map {
-    height: 30%;
+    height: 40%;
   }
   /* Optional: Makes the sample page fill the window. */
   html, body {

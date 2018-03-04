@@ -6,14 +6,16 @@
       =simple_form_for @cleaning, url: admin_cleanings_path do |f|
         .modal-header
           %button.close{"data-dismiss" => "modal", type: "button"} ×
-          %h4.modal-title Awesome!
+          %h4.modal-title Thanks for cleaning this block!
         .modal-body
-          %p Leave a note about this block (optional)
-          =f.input :note, label: false
-          =f.input :before_photo, as: :file
-          =f.input :after_photo, as: :file
+          =f.input :note, label: false, label: "Leave a note about this block (optional)"
+          .row.text-center
+            .col-md-6.text-center
+              =f.input :before_photo, as: :file, label: "Before Photo (optional)"
+            .col-md-6.text-center
+              =f.input :after_photo, as: :file, label: "After Photo (optional)"
           =f.input :block_id, as: :hidden, input_html: { :value => @block.id }
 
-        .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
+        .modal-footer.text-center
+          %button.text-center.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
           =f.button :submit, "Mark Block as Clean", class: 'btn-info'
