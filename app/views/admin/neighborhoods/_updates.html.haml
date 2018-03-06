@@ -6,20 +6,23 @@
       ="These #{@blocks.count} blocks have been cleaned #{@neighborhood.cleanings.count} times."
 
 .row
-  .col-md-6
-    %h2.text-center
-      Recent Activity
-    -@neighborhood.cleanings.order(time: :desc).limit(10).each do |cleaning|
-      %h4.text-center
-        =link_to admin_block_path(cleaning.block) do 
-          =cleaning.block.name
-        ="was #{cleaning.days_since_cleaned.downcase}."
-      .text-center
-        =cleaning.note
-        =link_to admin_block_path(cleaning.block) do 
-          =render partial: 'admin/blocks/cleaning_photos', locals: {cleaning: cleaning}
-      %hr
-  .col-md-6
+  .col-md-7
+    .row
+      .col-md-1
+      .col-md-10
+        %h2.text-center
+          Recent Activity
+        -@neighborhood.cleanings.order(time: :desc).limit(10).each do |cleaning|
+          %h4.text-center
+            =link_to admin_block_path(cleaning.block) do 
+              =cleaning.block.name
+            ="was #{cleaning.days_since_cleaned.downcase}."
+          .text-center
+            =cleaning.note
+            =link_to admin_block_path(cleaning.block) do 
+              =render partial: 'admin/blocks/cleaning_photos', locals: {cleaning: cleaning}
+          %hr
+  .col-md-5
 
     %h2.text-center Available Blocks
     -@neighborhood.blocks.orphaned.each do |block|
