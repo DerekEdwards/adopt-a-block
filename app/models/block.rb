@@ -2,7 +2,7 @@ class Block < ApplicationRecord
 
   belongs_to :neighborhood
   has_many :cleanings
-  belongs_to :user
+  belongs_to :user, optional: true 
 
   serialize :polyline
 
