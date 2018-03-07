@@ -12,7 +12,11 @@
     <!-- NAV MENU -->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <% if @block %>
+        <% if @cleaning %>
+          <a href=<%= root_path%>><i class="navbar-brand fa fa-home"></i></a>
+          <a class="navbar-brand" href=<%= admin_neighborhood_path(@cleaning.block.neighborhood)%>> <%=@cleaning.block.neighborhood.name%> </a>
+          <a class="navbar-brand" href=<%= admin_block_path(@cleaning.block)%>> <%=@cleaning.block.name%> </a>
+        <% elsif @block %>
           <a href=<%= root_path%>><i class="navbar-brand fa fa-home"></i></a>
           <a class="navbar-brand" href=<%= admin_neighborhood_path(@block.neighborhood)%>> <%=@block.neighborhood.name%> </a>
         <% else %>

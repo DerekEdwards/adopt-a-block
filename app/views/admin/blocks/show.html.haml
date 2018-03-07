@@ -29,6 +29,8 @@
     -@block.cleanings.order(time: :desc).each do |cleaning|
       %hr
       %h4
+        =link_to edit_admin_cleaning_path(cleaning) do
+          %i.fa.fa-edit
         ="Block cleaned on #{cleaning.time.strftime("%a %b %e, %Y")}"
       .row
         .col-md-3
