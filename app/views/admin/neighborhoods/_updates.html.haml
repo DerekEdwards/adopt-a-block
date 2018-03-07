@@ -6,6 +6,20 @@
       ="These #{@blocks.count} blocks have been cleaned #{@neighborhood.cleanings.count} times."
 
 .row
+  .col-md-5
+
+    %h2.text-center Available Blocks
+    -@neighborhood.blocks.orphaned.each do |block|
+      .row.text-center
+        =link_to admin_block_path(block) do 
+          =block.name
+
+    %h2.text-center Adopted Blocks
+    -@neighborhood.blocks.adopted.each do |block|
+      .row.text-center
+        =link_to admin_block_path(block) do
+          =block.name
+
   .col-md-7
     .row
       .col-md-1
@@ -22,19 +36,6 @@
             =link_to admin_block_path(cleaning.block) do 
               =render partial: 'admin/blocks/cleaning_photos', locals: {cleaning: cleaning}
           %hr
-  .col-md-5
-
-    %h2.text-center Available Blocks
-    -@neighborhood.blocks.orphaned.each do |block|
-      .row.text-center
-        =link_to admin_block_path(block) do 
-          =block.name
-
-    %h2.text-center Adopted Blocks
-    -@neighborhood.blocks.adopted.each do |block|
-      .row.text-center
-        =link_to admin_block_path(block) do
-          =block.name
 
 
        
