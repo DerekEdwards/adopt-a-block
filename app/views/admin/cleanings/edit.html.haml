@@ -1,0 +1,28 @@
+%h1.text-center
+  Edit Cleaning Details
+.row
+  .col-md-2
+  .col-md-8
+    =simple_form_for @cleaning, url: admin_cleaning_path(@cleaning) do |f|
+      =f.input :note, label: false, label: "Leave a note about this block (optional)"
+      =f.input :time, as: :date, label: false, label: "Date of Cleaning"
+      =render partial: 'admin/blocks/cleaning_photos', locals: {cleaning: @cleaning}
+      .row.text-center
+        .col-md-6.text-center
+          =f.input :before_photo, as: :file, label: "Before Photo (optional)"
+        .col-md-6.text-center
+          =f.input :after_photo, as: :file, label: "After Photo (optional)"
+      =f.input :block_id, as: :hidden, input_html: { :value => @cleaning.block.id }
+      .text-center
+        =f.button :submit, "Update Cleaning", class: 'btn-info'
+
+
+.row 
+  %br
+  %br
+  %br
+  %hr
+  .col-md-12.text-center
+    =link_to admin_cleaning_path, method: :delete, data: {confirm: 'Are you sure you want to delete this cleaning?'} do
+      %button.btn.btn-danger.btn-sm
+        Delete Cleaning
