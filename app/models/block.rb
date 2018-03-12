@@ -39,10 +39,12 @@ class Block < ApplicationRecord
       return "#00CC00"
     elsif lc > (Time.now - 15.days)
       return "#FFFF00"
-    elsif lc > (Time.now - 22.days)
+    elsif lc > (Time.now - 30.days)
       return "#FF9900"
-    else
+    elsif lc > (Time.now - 90.days)
       return "#FF0000"
+    else
+      return "#000000"
     end
   end
 
