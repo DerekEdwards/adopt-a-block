@@ -59,7 +59,7 @@
       infowindow = new google.maps.InfoWindow();
       contents[i] = block_lines[i]['content'];
 
-      new_line.addListener('mouseover', function(hoverEvent) {
+      new_line.addListener('click', function(hoverEvent) {
         var position = hoverEvent.latLng;
         infowindow.setContent(contents[this.id]);
         infowindow.setPosition(position);
