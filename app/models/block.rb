@@ -31,6 +31,14 @@ class Block < ApplicationRecord
     return lc.days_since_cleaned
   end
 
+  def adopted_description
+    if user
+      return "This block is adopted by #{user.name}"
+    else
+      return "Contact <a href='mailto:dedwards8@gmail.com'>Derek Edwards</a> to adopt this block."
+    end
+  end
+
   def color
     lc = last_cleaned
     if lc.nil?
@@ -49,10 +57,10 @@ class Block < ApplicationRecord
   end
 
   def content
-    puts 
-    "<strong><a href=#{Rails.application.routes.url_helpers.admin_block_path(self)}>#{name}</a></strong>
+    "<h3><a href=#{Rails.application.routes.url_helpers.admin_block_path(self)}>#{name}</a></h3>
      <br>#{description}
-     <br>#{days_since_cleaned}"
+     <br>#{days_since_cleaned}
+     <br>#{adopted_description}"
   end
 
   def center
