@@ -5,9 +5,13 @@
 
 = content_tag "div", id: "map", data: {blocks: @map_hash} do
   Loading map...
-= content_tag "div", id: "legend" do
-  %h4
-    Legend
+.row
+  .col-md-2.text-center.white-background Legend: 
+  .col-md-2.text-center.green-background Cleaned under 9 days ago
+  .col-md-2.text-center.yellow-background Cleaned 9-15 days ago
+  .col-md-2.text-center.orange-background Cleaned 16-30 days ago
+  .col-md-2.text-center.red-background Cleaned 31-90 days ago
+  .col-md-2.text-center.black-background Cleaned over 90 days ago
 
 =render partial: 'updates'
 
@@ -19,16 +23,7 @@
   #map {
     height: 65%;
   }
-  #legend {
-    font-family: Arial, sans-serif;
-    background: #fff;
-    padding: 10px;
-    margin: 10px;
-    border: 3px solid #000;
-  }
-  #legend h4 {
-    margin-top: 0;
-  }
+
   html, body {
     height: 100%;
     margin: 0;
@@ -51,30 +46,6 @@
 
     var contents = [];
 
-    var legend = document.getElementById('legend');
-
-    var greenDiv = document.createElement('div');
-    greenDiv.innerHTML = "<div class='green-background'>Cleaned under 9 days ago</div>";
-    legend.appendChild(greenDiv);
-    
-    var yellowDiv = document.createElement('div');
-    yellowDiv.innerHTML = "<div class='yellow-background'>Cleaned 9-15 days ago</div>";
-    legend.appendChild(yellowDiv);
-
-    var orangeDiv = document.createElement('div');
-    orangeDiv.innerHTML = "<div class='orange-background'>Cleaned 16-30 days ago</div>";
-    legend.appendChild(orangeDiv);
-
-    var redDiv = document.createElement('div');
-    redDiv.innerHTML = "<div class='red-background'>Cleaned 31-90 days ago</div>";
-    legend.appendChild(redDiv);
-
-    var blackDiv = document.createElement('div');
-    blackDiv.innerHTML = "<div class='black-background'>Cleaned over 90 days ago</div>";
-    legend.appendChild(blackDiv);
-
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
-
     for(var i = 0; i < block_lines.length; i++){
       var new_line = new google.maps.Polyline({
         id: i,
@@ -87,7 +58,6 @@
 
       infowindow = new google.maps.InfoWindow();
       contents[i] = block_lines[i]['content'];
-
 
       new_line.addListener('mouseover', function(hoverEvent) {
         var position = hoverEvent.latLng;
