@@ -73,9 +73,6 @@
     blackDiv.innerHTML = "<div class='black-background'>Cleaned over 90 days ago</div>";
     legend.appendChild(blackDiv);
 
-
-    
-
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
     for(var i = 0; i < block_lines.length; i++){
@@ -92,8 +89,8 @@
       contents[i] = block_lines[i]['content'];
 
 
-      new_line.addListener('click', function(clickEvent) {
-        var position = clickEvent.latLng;
+      new_line.addListener('mouseover', function(hoverEvent) {
+        var position = hoverEvent.latLng;
         infowindow.setContent(contents[this.id]);
         infowindow.setPosition(position);
         infowindow.open(map);
