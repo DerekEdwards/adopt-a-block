@@ -1,11 +1,22 @@
 %h1.text-center
-  All Neighborhoods
+  Welcome to CleanBoston.org
+%h4.text-center
+  Keeping Boston beautiful, one block at a time.
 
--@neighborhoods.each do |neighborhood|
-  .row.text-center
+.row
+  .col-md-6
+    %h2.text-center
+      What is CleanBoston.org?
     .col-md-12
-      %h2
-        =link_to admin_neighborhood_path(neighborhood) do 
-          =neighborhood.name
-      %h4
-        =neighborhood.description
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum, tellus vel condimentum laoreet, sapien nunc tempus est, quis fringilla metus leo at nunc. Donec diam massa, bibendum vitae consectetur ut, vulputate quis dui. Vivamus molestie nisl consequat blandit finibus. Aenean id rhoncus mauris, ut mattis mauris. Integer pretium id mauris vel convallis. Nullam sit amet finibus sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam quis velit quis quam blandit dictum. Vestibulum lacus mauris, cursus quis purus vitae, lacinia laoreet felis. Morbi fermentum ante a neque eleifend vulputate. Phasellus maximus massa augue, et suscipit eros bibendum a. Cras id congue risus, nec posuere elit. Sed scelerisque ante sapien, sit amet elementum nunc blandit id.
+
+  .col-md-6
+    %h2.text-center
+      Find Your Neighborhood
+
+      -@neighborhoods.each do |neighborhood|
+        .row.text-center
+          .col-md-12
+            %h2
+              =link_to admin_neighborhood_path(neighborhood) do 
+                =neighborhood.name
