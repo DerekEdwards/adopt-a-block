@@ -43,13 +43,13 @@ class Block < ApplicationRecord
     lc = last_cleaned
     if lc.nil?
       return "#000000"
-    elsif lc > (Time.now - 8.days)
+    elsif lc > (Time.now - 11.days)
       return "#00CC00"
-    elsif lc > (Time.now - 15.days)
+    elsif lc > (Time.now - 21.days)
       return "#FFFF00"
-    elsif lc > (Time.now - 30.days)
+    elsif lc > (Time.now - 31.days)
       return "#FF9900"
-    elsif lc > (Time.now - 90.days)
+    elsif lc > (Time.now - 91.days)
       return "#FF0000"
     else
       return "#000000"
