@@ -15,6 +15,7 @@
             .col-md-6.text-center
               =f.input :after_photo, as: :file, label: "After Photo (optional)"
           =f.input :block_id, as: :hidden, input_html: { :value => @block.id }
+          =f.input :time, as: :date, label: false, label: "Date of Cleaning"
 
         .modal-footer.text-center
           %button.text-center.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel

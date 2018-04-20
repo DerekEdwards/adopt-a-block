@@ -42,6 +42,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
 gem 'simple_form'
 gem "font-awesome-rails"
+gem 'phony_rails' # For normalizing phone numbers
 ############################################
 
 ### User Mgmt ##############################

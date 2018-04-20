@@ -15,7 +15,7 @@
 .row
   .col-md-12.text-center
     =render partial: 'clean_modal'
-    %button.btn.btn-sm.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block Today
+    %button.btn.btn-sm.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
 %br
 
 = content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.center} do

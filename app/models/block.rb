@@ -57,7 +57,8 @@ class Block < ApplicationRecord
   end
 
   def content
-    "<h3><a href=#{Rails.application.routes.url_helpers.admin_block_path(self)}>#{name}</a></h3>
+    "<h2><a href=#{Rails.application.routes.url_helpers.admin_block_path(self)}>#{name}</a></h2>
+     <a href=#{Rails.application.routes.url_helpers.admin_block_path(self)}>View More</a>
      <br>#{description}
      <br>#{days_since_cleaned}
      <br>#{adopted_description}"
