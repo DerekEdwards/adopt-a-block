@@ -1,0 +1,14 @@
+%h1.text-center
+  =@user.name
+
+%h2.text-center
+  Your Blocks
+.row.text-center
+.col-md-2
+.col-md-8
+  .well
+    -@user.blocks.each do |b|
+      .row
+        %h3
+          =b.name
+          

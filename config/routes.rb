@@ -6,6 +6,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :neighborhoods, only: [:show, :index]
+
+    resources :neighborhoods do
+      resources :blocks, only: [:new, :create]
+    end
+
     resources :blocks, only: [:show]
     resources :cleanings, only: [:create, :edit, :update, :destroy]
   end
