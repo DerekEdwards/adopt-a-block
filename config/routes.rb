@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :blocks, only: [:new, :create]
     end
 
-    resources :blocks, only: [:show]
+    resources :blocks, only: [:show, :edit, :update]
     resources :cleanings, only: [:create, :edit, :update, :destroy]
   end
 end

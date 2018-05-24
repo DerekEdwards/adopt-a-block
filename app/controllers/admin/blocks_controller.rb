@@ -19,6 +19,23 @@ class Admin::BlocksController < ApplicationController
     @block.neighborhood = Neighborhood.find(params[:neighborhood_id])
   end
 
+  def edit
+    @block = Block.find(params[:id])
+  end
+
+  def update
+    @block = Block.find(params[:id])
+    @block.name = block_params["name"]
+    @block.description = block_params["description"]
+    formatted_polyline = converted_polyline
+    unless formatted_polyline.first[:lat] == 0
+      @block.polyline = formatted_polyline
+    end
+    @block.save
+    redirect_to admin_neighborhood_path @block.neighborhood
+  end
+
+
   private
 
   def block_params

@@ -8,17 +8,18 @@
 .row
   .col-md-5
 
-    %h2.text-center Available Blocks
-    -@neighborhood.blocks.orphaned.each do |block|
-      .row.text-center
-        =link_to admin_block_path(block) do 
-          =block.name
-
     %h2.text-center Adopted Blocks
     -@neighborhood.blocks.adopted.each do |block|
       .row.text-center
         =link_to admin_block_path(block) do
           =block.name
+
+    %h2.text-center Blocks Needing Adoption
+    -@neighborhood.blocks.orphaned.each do |block|
+      .row.text-center
+        =link_to admin_block_path(block) do 
+          =block.name
+
 
   .col-md-7
     .row
