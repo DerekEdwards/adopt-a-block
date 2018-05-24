@@ -2,21 +2,21 @@
   =simple_form_for @block, url: admin_neighborhood_blocks_path(@block.neighborhood) do |f|
     .col-md-2
     .col-md-8
-
-      =f.input :name, label: false, label: "Name"
-      =f.input :description, label: false, label: "Description"
-      =f.input :polyline, label: false, as: :hidden
-
-      =f.button :submit, "Create New Block", class: 'btn-info'
-
-
+      .row
+        =f.input :name, label: false, label: "Name"
+        =f.input :description, label: false, label: "Description"
+        =f.input :polyline, label: false, as: :hidden
 
 = content_tag "div", id: "map", data: {polyline: @block} do
   Loading map...
 
+%meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}
 
-%meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
 
+%br
+.row.text-center
+  %button.btn.btn-info{onclick: "$('#new_block').submit()"}
+    Create New Block
 :css
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
@@ -31,14 +31,8 @@
   }
 
 :javascript
-  // This example creates a 2-pixel-wide red polyline showing the path of
-  // the first trans-Pacific flight between Oakland, CA, and Brisbane,
-  // Australia which was made by Charles Kingsford Smith.
 
   function initMap() {
-    //var polyline = $('#map').data('polyline');
-    //var color = $('#map').data('color');
-    //var center = $('#map').data('center');
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 16,
@@ -63,9 +57,10 @@
     google.maps.event.addListener(drawingManager, 'polylinecomplete', function(line) {
       document.getElementById("block_polyline").value = line.getPath().getArray().toString();
 
-      alert(line.getPath().getArray().toString());  
+      //alert(line.getPath().getArray().toString());  
     });
   }
 
 %script{async: "", defer: "defer", src: "https://maps.googleapis.com/maps/api/js?key=#{Config.google_maps_api_key}&libraries=drawing&callback=initMap"}
   :cdata
+
