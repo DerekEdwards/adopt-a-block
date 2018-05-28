@@ -39,7 +39,7 @@ class Block < ApplicationRecord
     end
   end
 
-  def color
+  def hex_color
     lc = last_cleaned
     if lc.nil?
       return "#000000"
@@ -53,6 +53,23 @@ class Block < ApplicationRecord
       return "#FF0000"
     else
       return "#000000"
+    end
+  end
+
+  def color
+    lc = last_cleaned
+    if lc.nil?
+      return "black"
+    elsif lc > (Time.now - 11.days)
+      return "green"
+    elsif lc > (Time.now - 21.days)
+      return "yellow"
+    elsif lc > (Time.now - 31.days)
+      return "orange"
+    elsif lc > (Time.now - 91.days)
+      return "red"
+    else
+      return "black"
     end
   end
 
