@@ -1,0 +1,24 @@
+%h1.text-center
+  =@user.name
+%div.text-center
+  ="Member since #{@user.created_at.strftime('%B %Y')}."
+
+%h2.text-center
+  Your Blocks
+
+-if @user.blocks.count == 0
+  You have not adopted any blocks . . . yet.
+-else
+  -@user.blocks.each do |block|
+    =link_to admin_block_path(block) do
+      .row
+        .col-md-4
+        .col-md-4
+          .well.hover{class: "#{block.color}-background"}
+            %h4.text-center
+              =block.name
+            %div.text-center
+              =block.days_since_cleaned
+
+
+

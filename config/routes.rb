@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root "admin/neighborhoods#index"
 
+  resources :users, only: [:show]
+
   namespace :admin do
     resources :neighborhoods, only: [:show, :index]
 
