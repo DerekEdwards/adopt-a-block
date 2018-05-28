@@ -7,7 +7,15 @@
   Your Blocks
 
 -if @user.blocks.count == 0
-  You have not adopted any blocks . . . yet.
+  %h4.text-center You have not adopted any blocks.
+  %hr
+  %h5.text-center Find your neighborhood to get started
+  -@neighborhoods.each do |neighborhood|
+    .row.text-center
+      .col-md-12
+        %h3
+          =link_to admin_neighborhood_path(neighborhood) do 
+            =neighborhood.name
 -else
   -@user.blocks.each do |block|
     =link_to admin_block_path(block) do

@@ -1,0 +1,43 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title CleanBoston.org
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    / NAV MENU
+    %nav.navbar.navbar-default
+      .container-fluid
+        - if @cleaning
+          %a.navbar-brand{href: root_path} CleanBoston
+          %a.navbar-brand{href: admin_neighborhood_path(@cleaning.block.neighborhood)}
+            =@cleaning.block.neighborhood.name
+          %a.navbar-brand{href: admin_block_path(@cleaning.block)}
+            =@cleaning.block.name
+        - elsif @block
+          %a.navbar-brand{href: root_path} CleanBoston
+          %a.navbar-brand{href: admin_neighborhood_path(@block.neighborhood)}
+            =@block.neighborhood.name
+        - else
+          %a.navbar-brand{href: root_path} CleanBoston
+        .text-right
+          - if current_user
+            =link_to destroy_user_session_path, method: :delete, class: "navbar-brand navbar-right" do
+              Logout
+            %a.navbar-brand.navbar-right{href: user_path(current_user)}
+              ="Welcome #{current_user.name}"
+          - else
+            %a.navbar-brand.navbar-right{href: new_user_registration_path }
+              Sign Up
+            %a.navbar-brand.navbar-right{href: new_user_session_path}
+              Login
+
+
+
+    / NAV MENU
+    = yield
+    /
+      <p class="notice"><haml_loud> notice </haml_loud></p>
+      <p class="alert"><haml_loud> alert </haml_loud></p>
