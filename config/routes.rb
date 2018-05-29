@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     end
 
     resources :blocks, only: [:show, :edit, :update]
+    resources :blocks do
+      member do
+        post 'unadopt'
+      end
+    end
+    
     resources :cleanings, only: [:create, :edit, :update, :destroy]
   end
 

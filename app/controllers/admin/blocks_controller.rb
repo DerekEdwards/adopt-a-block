@@ -1,12 +1,13 @@
 class Admin::BlocksController < ApplicationController
 
+  before_action :set_block, except: [:new, :create]
+  before_action :ensure_access, only: [:unadopt]
+
   def show
-    @block = Block.find(params[:id])
     @new_cleaning = Cleaning.new
   end 
 
   def create
-    puts params[:polyline]
     @block = Block.new(block_params)
     @block.neighborhood = Neighborhood.find(params[:neighborhood_id])
     @block.polyline = converted_polyline
@@ -20,7 +21,6 @@ class Admin::BlocksController < ApplicationController
   end
 
   def edit
-    @block = Block.find(params[:id])
   end
 
   def update
@@ -32,11 +32,27 @@ class Admin::BlocksController < ApplicationController
       @block.polyline = formatted_polyline
     end
     @block.save
-    redirect_to admin_neighborhood_path @block.neighborhood
+    redirect_to admin_block_path(@block)
   end
 
+  def unadopt
+    @block.user = nil
+    @block.save
+    redirect_to admin_block_path(@block)
+  end
 
   private
+
+  def ensure_access
+    unless current_user and @block.user == current_user
+      redirect_to root_url
+      return
+    end
+  end
+
+  def set_block
+    @block = Block.find(params[:id])
+  end
 
   def block_params
     params.require(:block).permit(:name, :description, :polyline)
