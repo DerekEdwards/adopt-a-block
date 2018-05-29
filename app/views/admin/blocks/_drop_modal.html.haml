@@ -1,0 +1,13 @@
+/ Modal
+#dropModal.modal.fade{role: "dialog"}
+  .modal-dialog
+    / Modal content
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", type: "button"} ×
+        %h4.modal-title Are you sure that you want to un-adopt this block?
+      .modal-footer.text-center
+        %button.text-center.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
+        =link_to unadopt_admin_block_path(@block), method: :post do
+          %button.btn.btn-danger
+            Un-Adopt Block

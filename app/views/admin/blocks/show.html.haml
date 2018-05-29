@@ -12,10 +12,20 @@
     =mail_to 'dedwards8@gmail.com', "Derek Edwards"
     ="to adopt this block."
 
+// Clean Button
 .row
   .col-md-12.text-center
     =render partial: 'clean_modal'
     %button.btn.btn-sm.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
+
+// Drop Block Button
+-if current_user and current_user == @block.user
+  %br
+  .row
+    .col-md-12.text-center
+      =render partial: 'drop_modal'
+      %button.btn.btn-xs.btn-danger{"data-target" => "#dropModal", "data-toggle" => "modal", type: "button"} Un-Adopt this Block
+
 %br
 
 = content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.center} do
