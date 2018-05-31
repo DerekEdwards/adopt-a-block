@@ -16,5 +16,13 @@ module AdoptABlock
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    ActionMailer::Base.smtp_settings = {
+      address:              "email-smtp.us-east-1.amazonaws.com", 
+      port:                 587,
+      user_name:            ENV['SMTP_USERNAME'],
+      password:             ENV['SMTP_PASSWORD'],
+      authentication:       :login,
+    }
   end
 end
