@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "admin/neighborhoods#index"
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' } 
   resources :users, only: [:show]
 
   namespace :admin do
