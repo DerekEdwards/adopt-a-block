@@ -6,17 +6,24 @@
   %h5.text-center
     ="This block has been adopted by "
     =mail_to @block.user.email,  "#{@block.user.name}"
--else
-  %h5.text-center
-    ="Contact "
-    =mail_to 'dedwards8@gmail.com', "Derek Edwards"
-    ="to adopt this block."
 
-// Clean Button
-.row
-  .col-md-12.text-center
-    =render partial: 'clean_modal'
-    %button.btn.btn-sm.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
+  // Clean Button
+  .row
+    .col-md-12.text-center
+      =render partial: 'clean_modal'
+      %button.btn.btn-sm.btn-info{"data-target" => "#myModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
+
+-else
+  // Clean Button
+  .row
+    .col-md-6.text-right
+      =render partial: 'clean_modal'
+      %button.btn.btn-sm.btn-info{"data-target" => "#cleanModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
+    .col-md-6.text-left
+      =render partial: 'adopt_modal'
+      %button.btn.btn-sm.btn-info{"data-target" => "#adoptModal", "data-toggle" => "modal", type: "button"} Adopt this Block
+
+
 
 // Drop Block Button
 -if current_user and current_user == @block.user

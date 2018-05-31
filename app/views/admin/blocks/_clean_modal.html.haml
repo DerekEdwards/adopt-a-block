@@ -1,8 +1,8 @@
 / Modal
-#myModal.modal.fade{role: "dialog"}
+#cleanModal.modal.fade{role: "dialog"}
   .modal-dialog
     / Modal content
-    .modal-content
+    .modal-content.text-center
       =simple_form_for @new_cleaning, url: admin_cleanings_path do |f|
         .modal-header
           %button.close{"data-dismiss" => "modal", type: "button"} ×

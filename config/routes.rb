@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :blocks do
       member do
         post 'unadopt'
+        post 'adopt'
       end
     end
     

@@ -41,6 +41,12 @@ class Admin::BlocksController < ApplicationController
     redirect_to admin_block_path(@block)
   end
 
+  def adopt
+    @block.user = current_user
+    @block.save 
+    redirect_to admin_block_path(@block)
+  end
+
   private
 
   def ensure_access

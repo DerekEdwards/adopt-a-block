@@ -1,0 +1,39 @@
+/ Modal
+#adoptModal.modal.fade{role: "dialog"}
+  .modal-dialog
+    / Modal content
+    .modal-content.text-center
+      =simple_form_for @new_cleaning, url: admin_cleanings_path do |f|
+        .modal-header
+          %button.close{"data-dismiss" => "modal", type: "button"} ×
+          %h4.modal-title So you want to adopt this block?
+        .modal-body
+          %p
+            All that you need to do commit to cleaning this block once per week.
+          %p
+            Ideally, this should take no more than 20 minutes per week.
+        
+          -if current_user 
+            %p
+              What do you say?  
+            %p 
+              ="Click Adopt to accept the challenge and make #{@block.neighborhood.name} an even better place to live."
+            %p.fine-print
+              You can un-adopt this block at any time.
+          -else 
+            %p
+              Click Login or Sign Up below to adopt this block.
+
+        .modal-footer.text-center
+          %button.text-center.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
+          -if current_user
+            =link_to adopt_admin_block_path(@block), method: :post do
+              %button.btn.btn-info
+                Adopt
+          -else 
+            =link_to new_user_session_path(block_id: @block.id) do
+              %button.btn.btn-info
+                Login
+            =link_to new_user_registration_path(block_id: @block.id) do 
+              %button.btn.btn-info
+                Sign Up
