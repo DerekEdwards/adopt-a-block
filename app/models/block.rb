@@ -8,6 +8,7 @@ class Block < ApplicationRecord
 
   scope :adopted, ->{ where.not(user_id: nil) }
   scope :orphaned, ->{ where(user_id: nil) }
+  scope :order_by_name, ->{ order(name: :asc) }
 
   def clean note=nil, time=Time.now
     Cleaning.create(block: self, time: time, note: note)

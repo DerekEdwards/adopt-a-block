@@ -9,13 +9,17 @@
   .col-md-5
 
     %h2.text-center Adopted Blocks
-    -@neighborhood.blocks.adopted.each do |block|
+    -@neighborhood.blocks.order_by_name.adopted.each do |block|
       .row.text-center
         =link_to admin_block_path(block) do
-          =block.name
+          %h4
+            =block.name
+          .div.fine-print
+            ="Adopted by #{block.user.name}"
+          %br
 
     %h2.text-center Blocks Needing Adoption
-    -@neighborhood.blocks.orphaned.each do |block|
+    -@neighborhood.blocks.order_by_name.orphaned.each do |block|
       .row.text-center
         =link_to admin_block_path(block) do 
           =block.name
