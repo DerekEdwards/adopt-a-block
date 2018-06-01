@@ -35,8 +35,6 @@ class Block < ApplicationRecord
   def adopted_description
     if user
       return "This block is adopted by #{user.name}"
-    else
-      return "Contact <a href='mailto:dedwards8@gmail.com'>Derek Edwards</a> to adopt this block."
     end
   end
 
