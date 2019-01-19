@@ -31,7 +31,7 @@
       .col-md-10
         %h2.text-center
           Recent Activity
-        -@neighborhood.cleanings.order(time: :desc).limit(10).each do |cleaning|
+        -@neighborhood.cleanings.order(time: :desc).limit(20).each do |cleaning|
           %h4.text-center
             =link_to admin_block_path(cleaning.block) do 
               =cleaning.block.name
