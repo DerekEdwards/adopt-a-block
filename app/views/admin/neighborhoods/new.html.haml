@@ -1,0 +1,10 @@
+.row
+  =simple_form_for @neighborhood, method: :post, url: admin_neighborhoods_path do |f|
+    .col-md-2
+    .col-md-8
+      .row
+        =f.input :name, label: false, label: "Name"
+        =f.input :description, label: false, label: "Description"
+        =f.input :message, label: "Message"
+        =f.button :submit
+
