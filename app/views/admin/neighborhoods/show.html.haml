@@ -1,7 +1,15 @@
-%h1.text-center
-  =@neighborhood.name
-%h3.text-center
-  =@neighborhood.description
+%div
+  %h1.text-center
+    =@neighborhood.name
+  %h4.text-center
+    =@neighborhood.description
+
+-unless @neighborhood.message.empty?
+  %div.row
+    .col-md-2
+    .col-md-8
+      %h4.alert.alert-info.text-center
+        =@neighborhood.message.html_safe
 
 = content_tag "div", id: "map", data: {blocks: @map_hash} do
   Loading map...
@@ -73,3 +81,4 @@
   }
 %script{async: "", defer: "defer", src: "https://maps.googleapis.com/maps/api/js?key=#{Config.google_maps_api_key}&callback=initMap"}
   :cdata
+

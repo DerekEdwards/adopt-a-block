@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   namespace :admin do
-    resources :neighborhoods, only: [:show, :index]
+    resources :neighborhoods, only: [:show, :index, :new, :create, :edit, :update]
 
     resources :neighborhoods do
       resources :blocks, only: [:new, :create]
