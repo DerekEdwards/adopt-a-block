@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# This lets us use application.yml as a secret file.
+ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue {}
+
 module AdoptABlock
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

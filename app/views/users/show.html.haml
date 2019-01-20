@@ -1,6 +1,10 @@
 %h1.text-center
   =@user.name
 %div.text-center
+  =link_to edit_user_registration_path do
+    %i.fa.fa-edit
+    edit  
+%h3.text-center
   ="Member since #{@user.created_at.strftime('%B %Y')}."
 
 %h2.text-center
