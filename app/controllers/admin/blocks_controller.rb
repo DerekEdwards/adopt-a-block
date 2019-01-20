@@ -36,14 +36,12 @@ class Admin::BlocksController < ApplicationController
   end
 
   def unadopt
-    @block.user = nil
-    @block.save
+    @block.unadopt
     redirect_to admin_block_path(@block)
   end
 
   def adopt
-    @block.user = current_user
-    @block.save 
+    @block.adopt current_user
     redirect_to admin_block_path(@block)
   end
 

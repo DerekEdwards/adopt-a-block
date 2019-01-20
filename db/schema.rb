@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190119210502) do
+ActiveRecord::Schema.define(version: 20190120161902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20190119210502) do
     t.bigint "neighborhood_id"
     t.text "polyline"
     t.bigint "user_id"
+    t.datetime "adoption_expiration"
     t.index ["neighborhood_id"], name: "index_blocks_on_neighborhood_id"
     t.index ["user_id"], name: "index_blocks_on_user_id"
   end

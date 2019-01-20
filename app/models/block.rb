@@ -32,9 +32,21 @@ class Block < ApplicationRecord
     return lc.days_since_cleaned
   end
 
+  def adopt user
+    self.user = user
+    self.adoption_expiration = Time.now + 3.months
+    self.save 
+  end
+
+  def unadopt
+    self.user = nil
+    self.adoption_expiration = nil
+    self.save
+  end
+
   def adopted_description
     if user
-      return "This block is adopted by #{user.name}"
+      return "This block is adopted by #{user.name} until #{self.adoption_expiration.strftime('%b %e')}."
     end
   end
 
