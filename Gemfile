@@ -53,6 +53,7 @@ gem 'devise'
 ### Image Uploading ########################
 gem 'carrierwave', '~> 1.2' #For Uploading
 gem "fog"
+gem "mini_magick"
 ############################################
 
 group :development, :test do
