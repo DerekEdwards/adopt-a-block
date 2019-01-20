@@ -1,0 +1,18 @@
+%h2 
+  Friendly Reminder
+
+-if @blocks.count == 1
+  You have a block that needs attention.  
+-else
+  ="You have #{@blocks.count} blocks that need attention."
+
+%br
+%ul
+  -@blocks.each do |block|
+    %li
+      ="#{block.name} was last #{block.days_since_cleaned}."
+    
+
+%h4
+  ="Thanks for your help making your neighborhood a better place to live."
+
