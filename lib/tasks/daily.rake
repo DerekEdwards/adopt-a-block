@@ -25,4 +25,10 @@ namespace :daily do
     end
   end
 
+  desc "Run all daily tasks"
+  task :all => :environment do 
+    Rake::Task["daily:check_for_expirations"].invoke
+    Rake::Task["daily:check_for_dirty_blocks"].invoke
+  end
+
 end
