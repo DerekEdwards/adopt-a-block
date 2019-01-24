@@ -3,26 +3,25 @@
     CleanBoston.org
   %h4.text-center
     Because litter sucks.
-%hr
 .row
   .col-md-12
     %h3.text-center
       Find Your Neighborhood
 
-    -@neighborhoods.in_groups_of(4) do |neighborhoods|
+    -@neighborhoods.in_groups_of(1) do |neighborhoods|
       .row.text-center
         -neighborhoods.each do |neighborhood|
           -if neighborhood
-            .col-md-3
+            .col-md-4
+            .col-md-4
               %div.well.grid-cover-photo{onclick: "location.href='#{admin_neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
                 .overlay-text
                   =neighborhood.name
-                %img{src: 'https://www.boston.gov/sites/default/files/event-thumbnail-03-2018/5-5-18_jeffries_point_walking_tour_dan_bailey.jpg'}
-                %div
-                  =neighborhood.message.html_safe
-              //%h3
-              //  =link_to admin_neighborhood_path(neighborhood) do 
-              //    =neighborhood.name
+                .rounded
+                  %img{src: "#{neighborhood.photo}"}
+                -unless neighborhood.message.empty?
+                  %h4.alert.alert-info.text-center
+                    =neighborhood.message.html_safe
 
 .footer
   .row

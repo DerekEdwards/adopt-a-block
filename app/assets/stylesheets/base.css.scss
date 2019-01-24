@@ -29,6 +29,10 @@ html, body {
   padding: 10px; 
 }
 
+.rounded img {
+  border-radius: 10px 30px;
+}
+
 .hover:hover{
   box-shadow: 0 0 8px rgba(217,84,80, 0.6);
 }

@@ -3,20 +3,24 @@
     .col-md-6.cleaning-big
       .overlay-text
         Before
-      =image_tag cleaning.before_photo.url
+      .rounded  
+        =image_tag cleaning.before_photo.url
     .col-md-6.cleaning-big
       .overlay-text
         After
-      =image_tag cleaning.after_photo.url 
+      .rounded
+        =image_tag cleaning.after_photo.url 
 -elsif not cleaning.before_photo.url.nil? 
   .row
-    .col-md-12.cleaning-big
+    .col-md-12.cleaning-big.round
       .overlay-text
         Before
-      =image_tag cleaning.before_photo.url
+      .rounded
+        =image_tag cleaning.before_photo.url
 -elsif not cleaning.after_photo.url.nil?
   .row
-    .col-md-12.cleaning-big
+    .col-md-12.cleaning-big.round
       .overlay-text
         After
-      =image_tag cleaning.after_photo.url
+      .rounded 
+        =image_tag cleaning.after_photo.url

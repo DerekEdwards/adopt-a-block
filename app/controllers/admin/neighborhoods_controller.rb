@@ -32,7 +32,7 @@ class Admin::NeighborhoodsController < ApplicationController
   end
 
   def neighborhood_params
-    params.require(:neighborhood).permit(:name, :description, :message)
+    params.require(:neighborhood).permit(:name, :description, :message, :photo)
   end
 
 end
