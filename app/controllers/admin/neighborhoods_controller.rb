@@ -7,7 +7,7 @@ class Admin::NeighborhoodsController < ApplicationController
   end 
 
   def index
-    @neighborhoods = Neighborhood.all
+    @neighborhoods = Neighborhood.all.order(:name)
   end
 
   def new
