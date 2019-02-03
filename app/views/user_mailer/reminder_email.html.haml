@@ -9,10 +9,16 @@
 %br
 %ul
   -@blocks.each do |block|
-    %li
-      ="#{block.name} was last #{block.days_since_cleaned}."
-    
+    -if block.last_cleaned.nil?
+      %li 
+        ="#{block.name} has not been cleaned in at least 10 days."
+    -else
+      %li
+        ="#{block.name} was last #{block.days_since_cleaned}."
+
+%h4
+  =link_to root_url do
+    Please login to CleanBoston.org to mark your block as clean.
 
 %h4
   ="Thanks for your help making your neighborhood a better place to live."
-

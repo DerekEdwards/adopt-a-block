@@ -36,8 +36,9 @@ class Admin::CleaningsController < ApplicationController
   end
 
   def confirm_editable
-    @cleaning.editable?
-    head(403)
+    unless @cleaning.editable?
+      head(403)
+    end
   end
 
 end

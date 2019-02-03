@@ -15,8 +15,9 @@ namespace :daily do
       dirty_blocks = []
       user.blocks.each do |block|
         # Check to see if it's been exactly 10 days (This assumes that the task is only run once per day)
-        if ((Time.now - block.last_cleaned)/(24*3600)).to_i == 10
-          dirty_blocks << block
+        relevant_days = block.last_cleaned.nil? ? ((Time.now - block.created_at)/(24*3600)).to_i : ((Time.now - block.last_cleaned)/(24*3600)).to_i
+        if relevant_days % 10 == 0 and relevant_days > 0
+          dirty_blocks << block 
         end
       end
       unless dirty_blocks.empty?
