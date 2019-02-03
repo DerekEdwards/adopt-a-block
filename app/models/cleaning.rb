@@ -15,4 +15,9 @@ class Cleaning < ApplicationRecord
       return "cleaned #{days} days ago"
     end
   end
+
+  def editable?
+    (Time.now - created_at > 1.day) ? false : true
+  end
+
 end
