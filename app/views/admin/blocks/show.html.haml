@@ -1,40 +1,43 @@
-%h1.text-center
-  =@block.name
-%h3.text-center
-  =@block.description
--if @block.user
-  %h5.text-center
-    ="This block has been adopted by "
-    =mail_to @block.user.email,  "#{@block.user.name}"
-    =" until #{@block.adoption_expiration.strftime('%b %e')}."
+%div.backgroundImg
+  %h1.text-center
+    %br
+    =@block.name
+  %h3.text-center
+    =@block.description
+  -if @block.user
+    %h5.text-center
+      ="This block has been adopted by "
+      =mail_to @block.user.email,  "#{@block.user.name}"
+      =" until #{@block.adoption_expiration.strftime('%b %e')}."
 
-  // Clean Button
-  .row
-    .col-md-12.text-center
-      =render partial: 'clean_modal'
-      %button.btn.btn-sm.btn-info{"data-target" => "#cleanModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
+    // Clean Button
+    %br
+    .row
+      .col-md-12.text-center
+        =render partial: 'clean_modal'
+        %button.btn.btn-lg.btn-info{"data-target" => "#cleanModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
+    %br
 
--else
-  // Clean Button
-  .row
-    .col-md-6.text-right
-      =render partial: 'clean_modal'
-      %button.btn.btn-sm.btn-info{"data-target" => "#cleanModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
-    .col-md-6.text-left
-      =render partial: 'adopt_modal'
-      %button.btn.btn-sm.btn-info{"data-target" => "#adoptModal", "data-toggle" => "modal", type: "button"} Adopt this Block
+  -else
+    // Clean Button
+    %br
+    .row
+      .col-md-6.text-right
+        =render partial: 'clean_modal'
+        %button.btn.btn-lg.btn-info{"data-target" => "#cleanModal", "data-toggle" => "modal", type: "button"} I Cleaned this Block
+      .col-md-6.text-left
+        =render partial: 'adopt_modal'
+        %button.btn.btn-lg.btn-info{"data-target" => "#adoptModal", "data-toggle" => "modal", type: "button"} Adopt this Block
+    %br
 
 
-
-// Drop Block Button
--if current_user and current_user == @block.user
-  %br
-  .row
-    .col-md-12.text-center
-      =render partial: 'drop_modal'
-      %button.btn.btn-xs.btn-danger{"data-target" => "#dropModal", "data-toggle" => "modal", type: "button"} Un-Adopt this Block
-
-%br
+  // Drop Block Button
+  -if current_user and current_user == @block.user
+    .row
+      .col-md-12.text-center
+        =render partial: 'drop_modal'
+        %button.btn.btn-sm.btn-danger{"data-target" => "#dropModal", "data-toggle" => "modal", type: "button"} Un-Adopt this Block
+    %br
 
 = content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.center} do
   Loading map...
@@ -70,7 +73,7 @@
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
   #map {
-    height: 40%;
+    height: 50%;
   }
   /* Optional: Makes the sample page fill the window. */
   html, body {
