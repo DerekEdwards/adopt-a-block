@@ -27,6 +27,7 @@ html, body {
   background: rgb(0, 0, 0); /* fallback color */
   background: rgba(0, 0, 0, 0.7);
   padding: 10px; 
+  font-weight: bold;
 }
 
 .rounded img {
@@ -83,5 +84,36 @@ html, body {
 .grid-cover-photo img {
   max-width: 100%;
   max-height: 300px;
+}
+
+.no-padding{
+ margin: 0px !important;
+}
+
+h1 {
+  margin: 0px !important;
+}
+
+.backgroundImg { 
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(128, 128, 128, 0.5)
+    ), image-url("bricks.jpeg") no-repeat 
+  center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.well-transparent {
+   background-color: rgba(245, 245, 245, 0.0) !important;
+   border: none !important;
+
+}
+
+.well-transparent:hover { 
+  background-color: rgba(245, 245, 245, 0.3) !important;
+  border-radius: 10px 30px;
 }
 

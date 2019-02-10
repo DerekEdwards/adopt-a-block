@@ -1,15 +1,18 @@
-%div
-  %h1.text-center
+%div.backgroundImg.no-padding
+  %br
+  %div.h1.text-center.no-padding
     =@neighborhood.name
-  %h4.text-center
+  %div.h4.text-center.no-padding
     =@neighborhood.description
-
--unless @neighborhood.message.empty?
-  %div.row
-    .col-md-2
-    .col-md-8
-      %h4.alert.alert-info.text-center
-        =@neighborhood.message.html_safe
+  -unless @neighborhood.message.empty?
+    %div.row
+      .col-md-2
+      .col-md-8
+        %h4.alert.alert-info.text-center
+          =@neighborhood.message.html_safe
+  -else
+    %br
+    %br
 
 = content_tag "div", id: "map", data: {blocks: @map_hash} do
   Loading map...

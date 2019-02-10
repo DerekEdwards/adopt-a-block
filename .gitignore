@@ -22,3 +22,5 @@ config/application.yml
 public/uploads
 
 .byebug_history
+
+.DS_Store

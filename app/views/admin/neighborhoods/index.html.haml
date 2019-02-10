@@ -1,27 +1,30 @@
-%div
+%div.backgroundImg
+  %br
+  %br
   %h1.text-center
     CleanBoston.org
   %h4.text-center
     Because litter sucks.
-.row
-  .col-md-12
-    %h3.text-center
-      Find Your Neighborhood
+  %hr{style: "border-color:black;", width:"50%"}
+  .row
+    .col-md-12
+      %h3.text-center
+        Select Your Neighborhood
 
-    -@neighborhoods.in_groups_of(1) do |neighborhoods|
-      .row.text-center
-        -neighborhoods.each do |neighborhood|
-          -if neighborhood
-            .col-md-4
-            .col-md-4
-              %div.well.grid-cover-photo{onclick: "location.href='#{admin_neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
-                .overlay-text
-                  =neighborhood.name
-                .rounded
-                  %img{src: "#{neighborhood.photo}"}
-                -unless neighborhood.message.empty?
-                  %h4.alert.alert-info.text-center
-                    =neighborhood.message.html_safe
+      -@neighborhoods.in_groups_of(1) do |neighborhoods|
+        .row.text-center
+          -neighborhoods.each do |neighborhood|
+            -if neighborhood
+              .col-md-4
+              .col-md-4
+                %div.well.well-transparent.grid-cover-photo{onclick: "location.href='#{admin_neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
+                  .overlay-text
+                    =neighborhood.name
+                  .rounded
+                    %img{src: "#{neighborhood.photo}"}
+                  -unless neighborhood.message.empty?
+                    %h4.alert.alert-info.text-center
+                      =neighborhood.message.html_safe
 
 .footer
   .row
