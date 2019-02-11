@@ -1,0 +1,28 @@
+<head>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+      var raw_data = <%= raw @neighborhood.year_chart %>;
+      var data = google.visualization.arrayToDataTable(raw_data);
+
+      var options = {
+        title: 'Cleanings Per Month',
+        legend: { position: "none" },
+        vAxis: {
+          title: 'Cleanings'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(
+        document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div id="chart_div"></div>
+</body>

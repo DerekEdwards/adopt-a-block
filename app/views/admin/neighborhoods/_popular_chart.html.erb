@@ -1,0 +1,28 @@
+<head>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasicBusy);
+
+    function drawBasicBusy() {
+
+      var raw_data = <%= raw @neighborhood.busiest_chart %>;
+      var data = google.visualization.arrayToDataTable(raw_data);
+
+      var options = {
+        title: 'Busiest Blocks last 90 Days',
+        legend: { position: "none" },
+        vAxis: {
+          title: 'Cleanings'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(
+        document.getElementById('busy_chart_div'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div id="busy_chart_div"></div>
+</body>

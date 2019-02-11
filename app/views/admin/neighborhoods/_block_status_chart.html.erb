@@ -1,0 +1,23 @@
+<head>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawPieChart);
+
+    function drawPieChart() {
+
+      var raw_data = <%= raw @neighborhood.adopted_chart %>;
+      var data = google.visualization.arrayToDataTable(raw_data);
+
+      var options = {
+        title: 'Adopted vs Unadopted Blocks'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div id="piechart" style="width: 100%;"></div>
+</body>

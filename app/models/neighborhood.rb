@@ -5,6 +5,8 @@ class Neighborhood < ApplicationRecord
 
   mount_uploader :photo, PhotoUploader
 
+  include Chartable
+
   # Build a Map hash for Google Maps
   def map_hash
     block_array = []
