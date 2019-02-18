@@ -26,9 +26,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
+  def update
   #   super
-  # end
+  end
 
   # DELETE /resource
   # def destroy

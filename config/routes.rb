@@ -22,6 +22,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index]
+    resources :users do
+      collection do
+        post 'promote'
+        post 'demote'
+      end
+    end
   end
 
 end

@@ -44,6 +44,8 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem "font-awesome-rails"
 gem 'phony_rails' # For normalizing phone numbers
+gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'bootstrap-toggle-rails'
 ############################################
 
 ### User Mgmt ##############################
