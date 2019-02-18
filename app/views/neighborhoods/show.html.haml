@@ -2,6 +2,18 @@
   %br
   %div.h1.text-center.no-padding
     =@neighborhood.name
+  -if current_user and current_user.admin
+    .row
+      .col-md-4
+      .col-md-2.text-center
+        =link_to edit_neighborhood_path(@neighborhood) do
+          %i.fa.fa-edit
+          Edit Neighborhood 
+      .col-md-2.text-center
+        =link_to new_neighborhood_block_path(@neighborhood) do
+          %i.fa.fa-plus-circle
+          Create Block
+    %br
   %div.h4.text-center.no-padding
     =@neighborhood.description
   -unless @neighborhood.message.empty?

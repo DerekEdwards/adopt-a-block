@@ -1,0 +1,59 @@
+%h1.text-center
+  Users
+
+.row
+  .col-md-2
+  .col-md-8
+    %table.table.table-striped.center#users
+      %thead
+        %tr
+          %th Name
+          %th Email
+          %th.text-center.no-sort Admin
+      %tbody
+        -@users.each do |user|
+          %tr
+            %td
+              =user.name
+            %td
+              =user.email
+            %td.text-center
+              -unless current_user == user
+                %input.admin-checkbox{checked: user.admin, "data-toggle": "toggle", type: "checkbox", "data-on":"Yes", "data-off":"No", id: "#{user.id}", value: user.admin, data: user.id}
+
+
+:javascript
+
+  $(document).ready( function () {
+      $('#users').DataTable(
+        {
+          "paging": false,
+          "columnDefs": [
+            { "orderable": false, "targets": 2 }
+          ]}
+      );
+  } );
+
+
+  $(function() {
+    $('.admin-checkbox').change(function() {
+      this.value = this.checked;
+      if(this.value == "true"){
+        console.log('promote me');
+        $.ajax({
+          type: 'POST',
+          url: '#{ promote_admin_users_path }',
+          data: {"user_id": this.id}
+        });
+      } else {
+        console.log('DEMOTEMOTE');
+        $.ajax({
+          type: 'POST',
+          url: '#{ demote_admin_users_path }',
+          data: {"user_id": this.id}
+        });
+      }
+    })
+  })
+
+

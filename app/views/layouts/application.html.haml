@@ -12,13 +12,13 @@
       .container-fluid
         - if @cleaning
           %a.navbar-brand{href: root_path} CleanBoston
-          %a.navbar-brand{href: admin_neighborhood_path(@cleaning.block.neighborhood)}
+          %a.navbar-brand{href: neighborhood_path(@cleaning.block.neighborhood)}
             =@cleaning.block.neighborhood.name
-          %a.navbar-brand{href: admin_block_path(@cleaning.block)}
+          %a.navbar-brand{href: block_path(@cleaning.block)}
             =@cleaning.block.name
         - elsif @block
           %a.navbar-brand{href: root_path} CleanBoston
-          %a.navbar-brand{href: admin_neighborhood_path(@block.neighborhood)}
+          %a.navbar-brand{href: neighborhood_path(@block.neighborhood)}
             =@block.neighborhood.name
         - else
           %a.navbar-brand{href: root_path} CleanBoston
@@ -26,6 +26,9 @@
           - if current_user
             =link_to destroy_user_session_path, method: :delete, class: "navbar-brand navbar-right" do
               Logout
+            -if current_user.admin
+              %a.navbar-brand.navbar-right{href: admin_users_path}
+                ="Admin"
             %a.navbar-brand.navbar-right{href: user_path(current_user)}
               ="Welcome #{current_user.name}"
           - else

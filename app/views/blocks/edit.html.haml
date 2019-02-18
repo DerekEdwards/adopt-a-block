@@ -1,5 +1,5 @@
 .row
-  =simple_form_for @block, url: admin_neighborhood_blocks_path(@block.neighborhood) do |f|
+  =simple_form_for @block, html: {id: 'block_form'}, url: block_path(@block) do |f|
     .col-md-2
     .col-md-8
       .row
@@ -7,7 +7,7 @@
         =f.input :description, label: false, label: "Description"
         =f.input :polyline, label: false, as: :hidden
 
-= content_tag "div", id: "map", data: {polyline: @block} do
+= content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color} do
   Loading map...
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}
@@ -15,8 +15,18 @@
 
 %br
 .row.text-center
-  %button.btn.btn-info{onclick: "$('#new_block').submit()"}
-    Create New Block
+  %button.btn.btn-info{onclick: "$('#block_form').submit()"}
+    Update Block
+
+.row 
+  %br
+  %br
+  %br
+  %hr
+  .col-md-12.text-center
+    =link_to block_path, method: :delete, data: {confirm: 'Are you sure you want to delete this block? This action cannot be undone!'} do
+      %button.btn.btn-danger.btn-xs
+        Delete Block
 :css
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
@@ -34,11 +44,24 @@
 
   function initMap() {
 
+    var polyline = $('#map').data('polyline');
+    var color = $('#map').data('color');
+
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 16,
       center: {lat: 42.367735, lng: -71.035241},
       mapTypeId: 'roadmap'
     });
+
+    var new_line = new google.maps.Polyline({
+      path: polyline,
+      geodesic: true,
+      strokeColor: color,
+      strokeOpacity: .5,
+      strokeWeight: 8
+    });
+
+    new_line.setMap(map);
     
     var drawingManager = new google.maps.drawing.DrawingManager({
       drawingMode: google.maps.drawing.OverlayType.POLYLINE,

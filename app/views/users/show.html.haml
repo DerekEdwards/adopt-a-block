@@ -1,10 +1,11 @@
 %h1.text-center
   %br
   =@user.name
-%div.text-center
-  =link_to edit_user_registration_path do
-    %i.fa.fa-edit
-    edit  
+-if current_user == @user
+  %div.text-center
+    =link_to edit_user_registration_path do
+      %i.fa.fa-edit
+      edit  
 %h3.text-center
   ="Member since #{@user.created_at.strftime('%B %Y')}."
 
@@ -19,11 +20,11 @@
     .row.text-center
       .col-md-12
         %h3
-          =link_to admin_neighborhood_path(neighborhood) do 
+          =link_to neighborhood_path(neighborhood) do 
             =neighborhood.name
 -else
   -@user.blocks.each do |block|
-    =link_to admin_block_path(block) do
+    =link_to block_path(block) do
       .row
         .col-md-4
         .col-md-4

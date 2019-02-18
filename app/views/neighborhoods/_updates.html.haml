@@ -11,7 +11,7 @@
     %h2.text-center Adopted Blocks
     -@neighborhood.blocks.order_by_name.adopted.each do |block|
       .row.text-center
-        =link_to admin_block_path(block) do
+        =link_to block_path(block) do
           %h4
             =block.name
           .div.fine-print
@@ -21,7 +21,7 @@
     %h2.text-center Blocks Needing Adoption
     -@neighborhood.blocks.order_by_name.orphaned.each do |block|
       .row.text-center
-        =link_to admin_block_path(block) do 
+        =link_to block_path(block) do 
           =block.name
 
 
@@ -33,13 +33,13 @@
           Recent Activity
         -@neighborhood.cleanings.order(time: :desc).limit(20).each do |cleaning|
           %h4.text-center
-            =link_to admin_block_path(cleaning.block) do 
+            =link_to block_path(cleaning.block) do 
               =cleaning.block.name
             ="was #{cleaning.days_since_cleaned.downcase}."
           .text-center
             =cleaning.note
-            =link_to admin_block_path(cleaning.block) do 
-              =render partial: 'admin/blocks/cleaning_photos', locals: {cleaning: cleaning}
+            =link_to block_path(cleaning.block) do 
+              =render partial: 'blocks/cleaning_photos', locals: {cleaning: cleaning}
           %hr{style: "border-color:gray;", width:"50%"}
 
 

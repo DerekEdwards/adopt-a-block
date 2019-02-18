@@ -2,6 +2,13 @@
   %h1.text-center
     %br
     =@block.name
+  -if current_user and current_user.admin
+    .row
+      .col-md-4
+      .col-md-4.text-center
+        =link_to edit_block_path(@block) do
+          %i.fa.fa-edit
+          Edit Block
   %h3.text-center
     =@block.description
   -if @block.user
@@ -52,7 +59,7 @@
         %hr
         %h4
           -if cleaning.editable?
-            =link_to edit_admin_cleaning_path(cleaning) do
+            =link_to edit_cleaning_path(cleaning) do
               %i.fa.fa-edit
           ="Block cleaned on #{cleaning.time.strftime("%a %b %e, %Y")}"
         .row

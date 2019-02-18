@@ -1,5 +1,5 @@
 .row
-  =simple_form_for @neighborhood, method: :post, url: admin_neighborhoods_path do |f|
+  =simple_form_for @neighborhood, method: :patch, url: neighborhood_path(@neighborhood) do |f|
     .col-md-2
     .col-md-8
       .row

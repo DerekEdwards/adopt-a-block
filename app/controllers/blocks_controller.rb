@@ -1,7 +1,8 @@
-class Admin::BlocksController < ApplicationController
+class BlocksController < ApplicationController
 
   before_action :set_block, except: [:new, :create]
   before_action :ensure_access, only: [:unadopt]
+  before_action :confirm_admin, except: [:show, :adopt, :unadopt]
 
   def show
     @new_cleaning = Cleaning.new
@@ -12,7 +13,7 @@ class Admin::BlocksController < ApplicationController
     @block.neighborhood = Neighborhood.find(params[:neighborhood_id])
     @block.polyline = converted_polyline
     @block.save
-    redirect_to admin_neighborhood_path @block.neighborhood
+    redirect_to neighborhood_path @block.neighborhood
   end
 
   def new
@@ -32,17 +33,24 @@ class Admin::BlocksController < ApplicationController
       @block.polyline = formatted_polyline
     end
     @block.save
-    redirect_to admin_block_path(@block)
+    redirect_to block_path(@block)
   end
 
   def unadopt
     @block.unadopt
-    redirect_to admin_block_path(@block)
+    redirect_to block_path(@block)
   end
 
   def adopt
     @block.adopt current_user
-    redirect_to admin_block_path(@block)
+    redirect_to block_path(@block)
+  end
+
+  def destroy
+    @neighborhood = @block.neighborhood
+    @block.cleanings.delete_all
+    @block.destroy
+    redirect_to neighborhood_path @neighborhood
   end
 
   private

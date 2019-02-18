@@ -3,7 +3,7 @@
   .modal-dialog
     / Modal content
     .modal-content.text-center
-      =simple_form_for @new_cleaning, url: admin_cleanings_path do |f|
+      =simple_form_for @new_cleaning, url: cleanings_path do |f|
         .modal-header
           %button.close{"data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title So you want to adopt this block?
@@ -27,7 +27,7 @@
         .modal-footer.text-center
           %button.text-center.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
           -if current_user
-            =link_to adopt_admin_block_path(@block), method: :post do
+            =link_to adopt_block_path(@block), method: :post do
               %button.btn.btn-info
                 Adopt
           -else 

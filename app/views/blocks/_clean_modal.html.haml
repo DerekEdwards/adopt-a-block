@@ -3,7 +3,7 @@
   .modal-dialog
     / Modal content
     .modal-content.text-center
-      =simple_form_for @new_cleaning, url: admin_cleanings_path do |f|
+      =simple_form_for @new_cleaning, url: cleanings_path do |f|
         .modal-header
           %button.close{"data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title Thanks for cleaning this block!

@@ -1,4 +1,4 @@
-class Admin::CleaningsController < ApplicationController
+class CleaningsController < ApplicationController
 
   before_action :set_cleaning, except: [:create]
   before_action :confirm_editable, only: [:update]
@@ -7,7 +7,7 @@ class Admin::CleaningsController < ApplicationController
     @cleaning = Cleaning.new
     @cleaning.update_attributes!(cleaning_params)
     @cleaning.save!
-    redirect_to admin_block_path @cleaning.block
+    redirect_to block_path @cleaning.block
   end 
 
   def edit
@@ -17,12 +17,12 @@ class Admin::CleaningsController < ApplicationController
   def update
     @cleaning.update_attributes!(cleaning_params)
     @cleaning.save!
-    redirect_to admin_block_path @cleaning.block
+    redirect_to block_path @cleaning.block
   end
 
   def destroy
     @cleaning.destroy 
-    redirect_to admin_block_path @cleaning.block
+    redirect_to block_path @cleaning.block
   end
 
   private
