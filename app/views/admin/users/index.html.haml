@@ -1,0 +1,19 @@
+%h1.text-center
+  Users
+
+.row
+  .col-md-4
+  .col-md-4
+    %table.table-striped.center
+      %tr
+        %th Name
+        %th Email
+        %th Admin
+      -@users.each do |user|
+        %tr
+          %td
+            =user.name
+          %td
+            =user.email
+          %td
+            =user.admin

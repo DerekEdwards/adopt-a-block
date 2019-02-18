@@ -20,4 +20,8 @@ Rails.application.routes.draw do
     
   resources :cleanings, only: [:create, :edit, :update, :destroy]
 
+  namespace :admin do
+    resources :users, only: [:index]
+  end
+
 end
