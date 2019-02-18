@@ -90,5 +90,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # For Devise
-  config.action_mailer.default_url_options = { host: ENV['SMTP_HOST'], port: 80, protocol: 'https' }
+  config.action_mailer.default_url_options = { host: ENV['SMTP_HOST'], protocol: 'https' }
 end
