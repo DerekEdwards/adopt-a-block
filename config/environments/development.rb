@@ -56,10 +56,10 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   ActionMailer::Base.smtp_settings = {
-     address:              "email-smtp.us-east-1.amazonaws.com", 
-     port:                 587,
-     user_name:            "AKIAJJ7PJ7PBZ6NWGJLQ",
-     password:             "ApZWnAJNi0DScOh9n531KGq8QpPpzNBtRn3EaFDUO8iH",
-     authentication:       :login
+    address:              ENV['SMTP_SERVER'], 
+    port:                 587,
+    user_name:            ENV['SMTP_USERNAME'],
+    password:             ENV['SMTP_PASSWORD'],
+    authentication:       :login,
   }
 end
