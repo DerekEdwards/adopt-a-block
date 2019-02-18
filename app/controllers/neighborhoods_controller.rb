@@ -1,4 +1,4 @@
-class Admin::NeighborhoodsController < ApplicationController
+class NeighborhoodsController < ApplicationController
 
   def show
     @neighborhood = Neighborhood.find(params[:id])
@@ -17,7 +17,7 @@ class Admin::NeighborhoodsController < ApplicationController
   def create
     @neighborhood = Neighborhood.new(neighborhood_params)
     @neighborhood.save
-    redirect_to admin_neighborhood_path @neighborhood
+    redirect_to neighborhood_path @neighborhood
   end
 
   def edit
@@ -28,7 +28,7 @@ class Admin::NeighborhoodsController < ApplicationController
     @neighborhood = Neighborhood.find(params[:id])
     @neighborhood.update(neighborhood_params)
     @neighborhood.save
-    redirect_to admin_neighborhood_path @neighborhood
+    redirect_to neighborhood_path @neighborhood
   end
 
   def neighborhood_params

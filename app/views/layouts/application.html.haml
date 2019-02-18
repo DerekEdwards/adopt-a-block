@@ -12,13 +12,13 @@
       .container-fluid
         - if @cleaning
           %a.navbar-brand{href: root_path} CleanBoston
-          %a.navbar-brand{href: admin_neighborhood_path(@cleaning.block.neighborhood)}
+          %a.navbar-brand{href: neighborhood_path(@cleaning.block.neighborhood)}
             =@cleaning.block.neighborhood.name
-          %a.navbar-brand{href: admin_block_path(@cleaning.block)}
+          %a.navbar-brand{href: block_path(@cleaning.block)}
             =@cleaning.block.name
         - elsif @block
           %a.navbar-brand{href: root_path} CleanBoston
-          %a.navbar-brand{href: admin_neighborhood_path(@block.neighborhood)}
+          %a.navbar-brand{href: neighborhood_path(@block.neighborhood)}
             =@block.neighborhood.name
         - else
           %a.navbar-brand{href: root_path} CleanBoston

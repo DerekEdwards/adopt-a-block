@@ -52,7 +52,7 @@
         %hr
         %h4
           -if cleaning.editable?
-            =link_to edit_admin_cleaning_path(cleaning) do
+            =link_to edit_cleaning_path(cleaning) do
               %i.fa.fa-edit
           ="Block cleaned on #{cleaning.time.strftime("%a %b %e, %Y")}"
         .row

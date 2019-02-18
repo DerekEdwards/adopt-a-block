@@ -1,4 +1,4 @@
-class Admin::BlocksController < ApplicationController
+class BlocksController < ApplicationController
 
   before_action :set_block, except: [:new, :create]
   before_action :ensure_access, only: [:unadopt]
@@ -12,7 +12,7 @@ class Admin::BlocksController < ApplicationController
     @block.neighborhood = Neighborhood.find(params[:neighborhood_id])
     @block.polyline = converted_polyline
     @block.save
-    redirect_to admin_neighborhood_path @block.neighborhood
+    redirect_to neighborhood_path @block.neighborhood
   end
 
   def new
@@ -32,17 +32,17 @@ class Admin::BlocksController < ApplicationController
       @block.polyline = formatted_polyline
     end
     @block.save
-    redirect_to admin_block_path(@block)
+    redirect_to block_path(@block)
   end
 
   def unadopt
     @block.unadopt
-    redirect_to admin_block_path(@block)
+    redirect_to block_path(@block)
   end
 
   def adopt
     @block.adopt current_user
-    redirect_to admin_block_path(@block)
+    redirect_to block_path(@block)
   end
 
   private
