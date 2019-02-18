@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :blocks, only: [:new, :create]
   end
 
-  resources :blocks, only: [:show, :edit, :update]
+  resources :blocks, only: [:show, :edit, :update, :destroy]
   resources :blocks do
     member do
       post 'unadopt'

@@ -17,6 +17,16 @@
 .row.text-center
   %button.btn.btn-info{onclick: "$('#block_form').submit()"}
     Update Block
+
+.row 
+  %br
+  %br
+  %br
+  %hr
+  .col-md-12.text-center
+    =link_to block_path, method: :delete, data: {confirm: 'Are you sure you want to delete this block? This action cannot be undone!'} do
+      %button.btn.btn-danger.btn-xs
+        Delete Block
 :css
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */

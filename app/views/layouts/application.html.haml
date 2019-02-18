@@ -26,6 +26,9 @@
           - if current_user
             =link_to destroy_user_session_path, method: :delete, class: "navbar-brand navbar-right" do
               Logout
+            -if current_user.admin
+              %a.navbar-brand.navbar-right{href: admin_users_path}
+                ="Admin"
             %a.navbar-brand.navbar-right{href: user_path(current_user)}
               ="Welcome #{current_user.name}"
           - else

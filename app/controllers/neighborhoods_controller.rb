@@ -1,5 +1,7 @@
 class NeighborhoodsController < ApplicationController
 
+  before_action :confirm_admin, except: [:show, :index]
+
   def show
     @neighborhood = Neighborhood.find(params[:id])
     @blocks =  @neighborhood.blocks

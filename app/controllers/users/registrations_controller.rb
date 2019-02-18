@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :authenticate_user!, only: [:edit, :update]
 
   # GET /resource/sign_up
   def new
@@ -21,13 +22,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
 
   # PUT /resource
   def update
-  #   super
+    super
   end
 
   # DELETE /resource
@@ -61,8 +62,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
+  # The path used after sign up.
+  def after_update_path_for(resource)
+    user_path(resource)
+  end
+
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def confirm_user_or_admin
+
+  end
 end
