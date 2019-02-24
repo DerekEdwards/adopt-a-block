@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     if params[:block_id]
       @block = Block.find(params[:block_id])
-      @block.user = current_user
+      @block.adopt current_user
       @block.save
     end
   end
