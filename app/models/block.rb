@@ -45,8 +45,10 @@ class Block < ApplicationRecord
   end
 
   def adopted_description
-    if user
+    if user and adoption_expiration
       return "This block is adopted by #{user.name} until #{self.adoption_expiration.strftime('%b %e')}."
+    elsif user
+      return "This block is adopted by #{user.name}."
     end
   end
 
