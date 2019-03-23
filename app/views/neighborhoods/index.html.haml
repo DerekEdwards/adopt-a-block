@@ -9,7 +9,8 @@
   .row
     .col-md-12
       %h3.text-center
-        Select Your Neighborhood
+        Click on Your Neighborhood
+      %br  
 
       -@neighborhoods.in_groups_of(1) do |neighborhoods|
         .row.text-center
@@ -17,14 +18,13 @@
             -if neighborhood
               .col-md-4
               .col-md-4
-                %div.well.well-transparent.grid-cover-photo{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
-                  .overlay-text
+                //%div.well.well-transparent.grid-cover-photo{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
+                .hover
+                  .overlay-text{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
                     =neighborhood.name
-                  .rounded
+                  .rounded.sized{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
                     %img{src: "#{neighborhood.photo}"}
-                  -unless neighborhood.message.empty?
-                    %h4.alert.alert-info.text-center
-                      =neighborhood.message.html_safe
+        %br      
 
 .footer
   .row
