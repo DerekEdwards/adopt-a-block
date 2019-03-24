@@ -29,11 +29,13 @@ module Chartable
   def busiest_chart
     busiest  = {}
     blocks.all.each do |block|
-       busiest[block.id] = {name: block.name, cleanings: block.cleanings.where('time > ?', Time.now - 90.days).count}
+       busiest[block.id] = {name: block.name, 
+                            cleanings: block.cleanings.where('time > ?', Time.now - 90.days).count, 
+                            last_cleaned: block.last_cleaned || block.created_at }
     end
 
     # Sort the Hash by Cleanings Most to Least
-    busiest = busiest.sort_by {|_key, value| -value[:cleanings]}
+    busiest = busiest.sort_by {|_key, value| [value[:cleanings], value[:last_cleaned]]}.reverse
     # Convert the Hash into a 2D Array of [Name, Cleanings] and only take the first 5 elements
     busiest = busiest.map{ |_key,value| [value[:name], value[:cleanings]] }[0..2]
     # Throw Headers on there 
