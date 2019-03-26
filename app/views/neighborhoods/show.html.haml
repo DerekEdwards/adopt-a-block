@@ -27,13 +27,18 @@
     %br
 = content_tag "div", id: "map", data: {blocks: @map_hash, lat: @neighborhood.lat, lng: @neighborhood.lng, zoom: @neighborhood.zoom} do
   Loading map...
-.row
-  .col-md-2.text-center.white-background Legend: 
-  .col-md-2.text-center.green-background Cleaned under 10 days ago
-  .col-md-2.text-center.yellow-background Cleaned 11-20 days ago
-  .col-md-2.text-center.orange-background Cleaned 21-30 days ago
-  .col-md-2.text-center.red-background Cleaned 31-90 days ago
-  .col-md-2.text-center.black-background Cleaned over 90 days ago
+
+%div.text-center.white-background.legend#legend{style: "margin: 10px;"}
+  %h3.text-center
+    Legend
+
+//.row //This is the old legend.
+//  .col-md-2.text-center.white-background Legend: 
+//  .col-md-2.text-center.green-background Cleaned under 10 days ago
+//  .col-md-2.text-center.yellow-background Cleaned 11-20 days ago
+//  .col-md-2.text-center.orange-background Cleaned 21-30 days ago
+//  .col-md-2.text-center.red-background Cleaned 31-90 days ago
+//  .col-md-2.text-center.black-background Cleaned over 90 days ago
 
 =render partial: 'updates'
 
@@ -91,7 +96,42 @@
       });
 
       new_line.setMap(map);
+
+    }  
+      
+    // Legend  
+    var colors = [
+                    {
+                      class: "green-background", 
+                      note: "Last cleaned 0-10 days ago"
+                    },
+                    {
+                      class: "yellow-background", 
+                      note: "Last cleaned 11-20 days ago"
+                    },
+                    {
+                      class: "orange-background", 
+                      note: "Last cleaned 21-30 days ago"
+                    },
+                    {
+                      class: "red-background", 
+                      note: "Last cleaned 31-90 days ago"
+                    },
+                    {
+                      class: "black-background", 
+                      note: "Last cleaned over 90 days ago"
+                    },
+                  ]
+    var legend = document.getElementById('legend');
+
+    for (var i in colors) {
+      var div = document.createElement('div');
+      div.innerHTML = colors[i].note;
+      div.setAttribute('class', colors[i].class)
+      legend.appendChild(div);
     }
+
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 
       
   }
