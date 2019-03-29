@@ -38,7 +38,10 @@ class Block < ApplicationRecord
     self.save 
   end
 
-  def unadopt
+  def unadopt send_email=false
+    if send_email 
+      UserMailer.unadopt_email(self).deliver!
+    end
     self.user = nil
     self.adoption_expiration = nil
     self.save
@@ -110,4 +113,7 @@ class Block < ApplicationRecord
     return {lat: lat/polyline.count, lng: lng/polyline.count}
   end
 
+  def cleanings_past_x_days days
+    self.cleanings.where('time > ?', Time.now - days.days - 1).count
+  end
 end

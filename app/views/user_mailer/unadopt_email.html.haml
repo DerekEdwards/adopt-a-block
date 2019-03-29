@@ -1,0 +1,20 @@
+%h2 
+  ="#{@block.name} has been un-adopted." 
+
+%h4
+  ="Thank you for taking care of this block for the past 90 days."
+  
+-if @block.cleanings_past_x_days(90) > 2  
+  %h4
+    ="Your block was cleaned #{@block.cleanings_past_x_days(90)} times in the past 90 days. Your hard work is greatly appreciated."  
+  
+%h2
+  If you want to re-adopt this block, 
+  =link_to "#{block_url(@block)}#adoptModal", method: :post do
+    CLICK HERE
+  ="."
+
+%h4
+  =link_to root_url do
+    www.CleanBoston.org 
+

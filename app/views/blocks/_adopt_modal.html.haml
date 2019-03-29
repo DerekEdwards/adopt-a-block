@@ -39,3 +39,11 @@
             =link_to new_user_registration_path(block_id: @block.id) do 
               %button.btn.btn-info
                 Sign Up
+
+:javascript
+  $(document).ready(function() {  
+    var modals = ['#adoptModal'];
+    if (window.location.hash && ~modals.indexOf(window.location.hash)) {
+       $(window.location.hash).modal();
+    }
+  })

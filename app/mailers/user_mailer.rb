@@ -6,4 +6,10 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Cleaning Reminder')
   end
 
+
+  def unadopt_email block
+    @block = block
+    mail(to: block.user.email, subject: 'Your block has been automatically un-adopted.')
+  end
+
 end
