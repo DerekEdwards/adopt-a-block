@@ -15,26 +15,49 @@
           Create Neighborhood
     %br
 
-  .row
-    .col-md-12
+  .row.text-center
+    .col-md-12.text-center
       %h3.text-center
         Click on Your Neighborhood
       %br  
 
-      -@neighborhoods.in_groups_of(1) do |neighborhoods|
+      -if @neighborhoods.count == 1
         .row.text-center
-          -neighborhoods.each do |neighborhood|
-            -if neighborhood
-              .col-md-4
-              .col-md-4
-                //%div.well.well-transparent.grid-cover-photo{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
-                .hover
-                  .overlay-text{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
-                    =neighborhood.name
-                  .rounded.sized{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
-                    %img{src: "#{neighborhood.photo}"}
-        %br      
-
+          .col-md-4
+          .col-md-4
+            -neighborhood = @neighborhoods.first
+            .hover
+              .overlay-text{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
+                =neighborhood.name
+              .rounded.sized{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
+                %img{src: "#{neighborhood.photo}"}
+      
+      -elsif @neighborhoods.count == 2
+        .row.text-center
+          .col-md-3
+          -@neighborhoods.each do |neighborhood|
+            .col-md-3
+              .hover
+                .overlay-text{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
+                  =neighborhood.name
+                .rounded.sized{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
+                  %img{src: "#{neighborhood.photo}"}
+      
+      -else
+        -@neighborhoods.in_groups_of(3) do |neighborhoods|
+          .row.text-center
+            .col-md-1 
+            .col-md-10
+              -neighborhoods.each do |neighborhood|
+                -if neighborhood
+                  .col-md-4.text-center
+                    .hover
+                      .overlay-text{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
+                        =neighborhood.name
+                      .rounded.sized{onclick: "location.href='#{neighborhood_path(neighborhood)}';", onMouseOver: "this.style.cursor='pointer'"}
+                        %img{src: "#{neighborhood.photo}"}
+          %br
+  %br
 .footer
   .row
     .col-md-12
