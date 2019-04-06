@@ -9,7 +9,7 @@ class NeighborhoodsController < ApplicationController
   end 
 
   def index
-    @neighborhoods = Neighborhood.all.order(:name)
+    @neighborhoods = Neighborhood.published.order(:name)
   end
 
   def new
@@ -34,7 +34,7 @@ class NeighborhoodsController < ApplicationController
   end
 
   def neighborhood_params
-    params.require(:neighborhood).permit(:name, :description, :message, :photo, :lat, :lng, :zoom)
+    params.require(:neighborhood).permit(:name, :description, :message, :photo, :lat, :lng, :zoom, :published)
   end
 
 end

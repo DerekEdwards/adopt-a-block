@@ -5,6 +5,8 @@ class Neighborhood < ApplicationRecord
 
   mount_uploader :photo, PhotoUploader
 
+  scope :published, ->{ where(published: true) }
+
   include Chartable
 
   # Build a Map hash for Google Maps
