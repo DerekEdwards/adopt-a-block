@@ -6,6 +6,15 @@
   %h4.text-center
     Because litter sucks.
   %hr{style: "border-color:black;", width:"50%"}
+  -if current_user and current_user.admin
+    .row
+      .col-md-4
+      .col-md-4.text-center
+        =link_to new_neighborhood_path do
+          %i.fa.fa-plus-circle
+          Create Neighborhood
+    %br
+
   .row
     .col-md-12
       %h3.text-center

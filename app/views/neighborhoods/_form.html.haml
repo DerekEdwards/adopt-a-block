@@ -1,0 +1,12 @@
+.col-md-2
+.col-md-8
+  .row
+    =f.input :name, label: false, label: "Name"
+    =f.input :description, label: false, label: "Description"
+    =f.input :message, label: "Message"
+    =f.input :lat, label: "Lat"
+    =f.input :lng, label: "Lng"
+    =f.input :zoom, label: "Zoom"
+    =f.input :photo, as: :file, label: "Cover Photo"
+    =f.input :published, as: :boolean, label: "Published?"
+    =f.button :submit
