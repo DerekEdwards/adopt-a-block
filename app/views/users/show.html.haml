@@ -18,6 +18,7 @@
   %h5.text-center Find your neighborhood to get started
   -@neighborhoods.each do |neighborhood|
     .row.text-center
+      %br
       .col-md-12
         %h3
           =link_to neighborhood_path(neighborhood) do 

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :cleanings, only: [:create, :edit, :update, :destroy]
 
   namespace :admin do
+    resources :neighborhoods, only: [:index]
     resources :users, only: [:index]
     resources :users do
       collection do

@@ -1,0 +1,20 @@
+%br
+%h1.text-center
+  Neighborhoods
+
+.row
+  .col-md-2
+  .col-md-8
+    %table.table.table-striped.center#users
+      %thead
+        %tr
+          %th Name
+          %th Published
+      %tbody
+        -@neighborhoods.each do |neighborhood|
+          %tr
+            %td
+              =link_to neighborhood_url(neighborhood) do 
+                =neighborhood.name
+            %td
+              =neighborhood.published

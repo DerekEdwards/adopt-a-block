@@ -28,7 +28,10 @@
               Logout
             -if current_user.admin
               %a.navbar-brand.navbar-right{href: admin_users_path}
-                ="Admin"
+                ="Users"
+              %a.navbar-brand.navbar-right{href: admin_neighborhoods_path}
+                ="Neighborhoods"
+
             %a.navbar-brand.navbar-right{href: user_path(current_user)}
               ="Welcome #{current_user.name}"
           - else

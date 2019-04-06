@@ -1,3 +1,4 @@
+%br
 %h1.text-center
   Users
 
@@ -19,8 +20,7 @@
               =user.email
             %td.text-center
               -unless current_user == user
-                %input.admin-checkbox{checked: user.admin, "data-toggle": "toggle", type: "checkbox", "data-on":"Yes", "data-off":"No", id: "#{user.id}", value: user.admin, data: user.id}
-
+                %input.admin-checkbox{checked: user.admin, "data-toggle": "toggle", type: "checkbox", "data-on":"Yes", "data-off":"No", id: "#{user.id}", value: user.admin, data: user.id} 
 
 :javascript
 
@@ -39,14 +39,12 @@
     $('.admin-checkbox').change(function() {
       this.value = this.checked;
       if(this.value == "true"){
-        console.log('promote me');
         $.ajax({
           type: 'POST',
           url: '#{ promote_admin_users_path }',
           data: {"user_id": this.id}
         });
       } else {
-        console.log('DEMOTEMOTE');
         $.ajax({
           type: 'POST',
           url: '#{ demote_admin_users_path }',
