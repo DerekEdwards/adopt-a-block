@@ -7,7 +7,7 @@
         =f.input :description, label: false, label: "Description"
         =f.input :polyline, label: false, as: :hidden
 
-= content_tag "div", id: "map", data: {polyline: @block} do
+= content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.neighborhood.center} do
   Loading map...
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}
@@ -21,7 +21,7 @@
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
   #map {
-    height: 40%;
+    height: 60%;
   }
   /* Optional: Makes the sample page fill the window. */
   html, body {
@@ -34,9 +34,16 @@
 
   function initMap() {
 
+    var polyline = $('#map').data('polyline');
+    var color = $('#map').data('color');
+    var center = $('#map').data('center');
+
+    console.log(center);
+
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 16,
-      center: {lat: 42.367735, lng: -71.035241},
+      center: center,
+      color: color,
       mapTypeId: 'roadmap'
     });
     

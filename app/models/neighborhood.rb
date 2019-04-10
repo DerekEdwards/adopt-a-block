@@ -17,4 +17,8 @@ class Neighborhood < ApplicationRecord
     end
     block_array
   end
+
+  def center
+    return {lat: lat.to_f, lng: lng.to_f}
+  end
 end
