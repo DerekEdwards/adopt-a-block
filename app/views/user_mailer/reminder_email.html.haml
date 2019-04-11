@@ -10,17 +10,15 @@
 %ul
   -@blocks.each do |block|
     -if block.last_cleaned.nil?
-      %li 
+      %ul 
         ="#{block.name} has not been cleaned in at least 10 days."
     -else
-      %li
-        ="#{block.name} was last #{block.days_since_cleaned}."
-
-%h4
-  Please login to 
-  =link_to root_url do
-    www.CleanBoston.org 
-  to mark your block as clean.
+      %ul
+        ="#{block.name} was last #{block.days_since_cleaned}."     
+    %ul  
+      =link_to "#{block_url(block)}#cleanModal", method: :post do
+        Click HERE to make this block as clean.
+    %br
 
 %h4
   ="Thanks for making your neighborhood a better place to live."

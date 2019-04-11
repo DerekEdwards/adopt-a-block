@@ -20,3 +20,11 @@
         .modal-footer.text-center
           %button.text-center.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
           =f.button :submit, "Mark Block as Clean", class: 'btn-info'
+
+:javascript
+  $(document).ready(function() {  
+    var modals = ['#cleanModal'];
+    if (window.location.hash && ~modals.indexOf(window.location.hash)) {
+       $(window.location.hash).modal();
+    }
+  })
