@@ -28,6 +28,7 @@ class BlocksController < ApplicationController
     @block = Block.find(params[:id])
     @block.name = block_params["name"]
     @block.description = block_params["description"]
+    @block.neighborhood_id =  block_params["neighborhood_id"]
     formatted_polyline = converted_polyline
     unless formatted_polyline.first[:lat] == 0
       @block.polyline = formatted_polyline
@@ -67,7 +68,7 @@ class BlocksController < ApplicationController
   end
 
   def block_params
-    params.require(:block).permit(:name, :description, :polyline)
+    params.require(:block).permit(:name, :description, :polyline, :neighborhood_id)
   end
 
   def converted_polyline

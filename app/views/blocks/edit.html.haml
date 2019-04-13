@@ -5,6 +5,7 @@
       .row
         =f.input :name, label: false, label: "Name"
         =f.input :description, label: false, label: "Description"
+        =f.input :neighborhood_id, label: false, label: "Neighborhood", collection: Neighborhood.all, include_blank: false
         =f.input :polyline, label: false, as: :hidden
 
 = content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.center} do
