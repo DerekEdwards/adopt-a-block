@@ -9,31 +9,36 @@
 %h3.text-center
   ="Member since #{@user.created_at.strftime('%B %Y')}."
 
-%h2.text-center
-  Your Blocks
+.col-md-12
+  %h2.text-center
+    Your Blocks
 
--if @user.blocks.count == 0
-  %h4.text-center You have not adopted any blocks.
-  %hr
-  %h5.text-center Find your neighborhood to get started
-  -@neighborhoods.each do |neighborhood|
-    .row.text-center
-      %br
-      .col-md-12
-        %h3
-          =link_to neighborhood_path(neighborhood) do 
-            =neighborhood.name
--else
-  -@user.blocks.each do |block|
-    =link_to block_path(block) do
-      .row
-        .col-md-4
-        .col-md-4
-          .well.hover{class: "#{block.color}-background"}
-            %h4.text-center
-              =block.name
-            %div.text-center
-              =block.days_since_cleaned
-
+  -if @user.blocks.count == 0
+    %h4.text-center You have not adopted any blocks.
+    %hr
+    %h5.text-center Find your neighborhood to get started
+    -@neighborhoods.each do |neighborhood|
+      .row.text-center
+        %br
+        .col-md-12
+          %h3
+            =link_to neighborhood_path(neighborhood) do 
+              =neighborhood.name
+  -else
+    -@user.blocks.each do |block|
+      =link_to block_path(block) do
+        .row
+          .col-md-4
+          .col-md-4
+            .well.hover{class: "#{block.color}-background"}
+              %h4.text-center
+                =block.name
+              %div.text-center
+                =block.days_since_cleaned
+.row
+  %h4.text-center
+    You are currently receiving reminders to clean your blocks.
+  %p
+    Turn off Block reminders
 
 
