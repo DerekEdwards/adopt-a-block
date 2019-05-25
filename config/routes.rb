@@ -3,6 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' } 
   resources :users, only: [:show, :edit, :update]
+  resources :users do 
+    member do 
+      get 'toggle_reminders' #TODO Remove this custom function, and use user update
+    end
+  end
 
   resources :neighborhoods, only: [:show, :index, :new, :create, :edit, :update]
   

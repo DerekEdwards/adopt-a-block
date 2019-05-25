@@ -35,10 +35,25 @@
                 =block.name
               %div.text-center
                 =block.days_since_cleaned
-.row
-  %h4.text-center
-    You are currently receiving reminders to clean your blocks.
-  %p
-    Turn off Block reminders
 
+.div#data-user-id{data: {user_id: @user.id}}
+-if @user.blocks.count > 0
+  .row.text-center.question
+    .question
+      Subscribe to Cleaning Reminders
+    %label.switch#reminder-email
+      %input{type: "checkbox", checked: "#{@user.subscribed_to_reminders}" == "true"}
+      %span.slider.round
+
+
+
+:javascript
+  $("#reminder-email").change(function(){
+    var userId = $('#data-user-id').data('userId');
+
+    $.ajax({
+      url: '/users/' + userId + '/toggle_reminders',
+      type: 'GET',
+    });
+  });
 
