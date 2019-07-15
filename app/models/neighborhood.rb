@@ -13,7 +13,7 @@ class Neighborhood < ApplicationRecord
   def map_hash
     block_array = []
     self.blocks.each do |block|
-      block_array << {polyline: block.polyline, color: block.hex_color, content: block.content}
+      block_array << {polyline: block.polyline, color: block.hex_color, content: block.content, center: [block.center[:lat], block.center[:lng]], adopted: block.adopted? }
     end
     block_array
   end

@@ -47,6 +47,10 @@ class Block < ApplicationRecord
     self.save
   end
 
+  def adopted?
+    return !(self.user_id == nil)
+  end
+
   def adopted_description
     if user and adoption_expiration
       return "This block is adopted by #{user.name} until #{self.adoption_expiration.strftime('%b %e')}."

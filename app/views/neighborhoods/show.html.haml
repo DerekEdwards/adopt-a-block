@@ -75,6 +75,23 @@
 
     var contents = [];
 
+    // Image for Showing Adopted Block
+    var image = {
+        url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+        // This marker is 20 pixels wide by 32 pixels high.
+        size: new google.maps.Size(32,32),
+        // The anchor for this image is the base of the flagpole at (0, 32).
+        anchor: new google.maps.Point(16,32)
+      };
+
+    var shape = {
+      coords: [1, 1, 1, 20, 18, 20, 18, 1],
+      type: 'poly'
+    };
+
+    var markers = [];
+
+
     for(var i = 0; i < block_lines.length; i++){
       var new_line = new google.maps.Polyline({
         id: i,
@@ -84,6 +101,25 @@
         strokeOpacity: .6,
         strokeWeight: 8
       });
+
+      if(block_lines[i]['adopted'] == true){
+        markers.push(marker);
+        var marker = new google.maps.Marker({
+          position: {lat: block_lines[i]['center'][0], lng: block_lines[i]['center'][1]},
+          id: i,
+          map: map,
+          icon: image,
+          shape: shape,
+          title: "Adopted"
+        });
+
+        marker.addListener('click', function(hoverEvent) {
+          var position = hoverEvent.latLng;
+          infowindow.setContent(contents[this.id]);
+          infowindow.setPosition(position);
+          infowindow.open(map);
+        });
+      }
 
       infowindow = new google.maps.InfoWindow();
       contents[i] = block_lines[i]['content'];
@@ -130,6 +166,11 @@
       div.setAttribute('class', colors[i].class)
       legend.appendChild(div);
     }
+
+    var div = document.createElement('div');
+    div.innerHTML = "<img src='http://maps.google.com/mapfiles/ms/icons/green-dot.png' height='22' width='22'>Block is Adopted";
+    div.setAttribute('class', 'white-background');
+    legend.appendChild(div);
 
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 
