@@ -16,8 +16,8 @@ module Chartable
     i = 0
     month = Date.today.at_beginning_of_month
     cleanings_array = []
-    while i < 6 do
-      cleanings_array << [month.strftime('%b %y'), cleanings.where('time >= ? AND time < ?', month, month.next_month).count]
+    while i < 13 do
+      cleanings_array << [month.strftime('%b'), cleanings.where('time >= ? AND time < ?', month, month.next_month).count]
       month = month.last_month
       i+=1
     end
