@@ -5,8 +5,21 @@
     .col-md-3
     .col-md-6
       .row
-        =f.input :name, label: false, label: "Name"
-        =f.input :description, label: false, label: "Description"
+        .col-md-12
+          =f.input :name
+      .row
+        .col-md-12    
+          =f.input :location_description, label: false, label: "Location"
+      .row
+        .col-md-4
+          =f.input :event_date
+        .col-md-3
+          =f.input :start_time
+        .col-md-5
+          =f.input :end_time
+      .row
+        .col-md-12
+          =f.input :description
 
 %br
 .row.text-center

@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(version: 20191124191149) do
     t.string "name", null: false
     t.text "description"
     t.text "location_description", null: false
-    t.datetime "start_time", null: false
-    t.datetime "end_time", null: false
+    t.date "event_date", null: false
+    t.time "start_time", null: false
+    t.time "end_time", null: false
     t.string "photo_url"
     t.bigint "user_id"
     t.bigint "neighborhood_id"
