@@ -5,6 +5,7 @@ class NeighborhoodsController < ApplicationController
   def show
     @neighborhood = Neighborhood.find(params[:id])
     @blocks =  @neighborhood.blocks
+    @upcoming_events = @neighborhood.events.future.order(:event_date).limit(3)
     @map_hash = @neighborhood.map_hash
   end 
 
