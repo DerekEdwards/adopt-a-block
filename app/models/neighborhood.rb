@@ -2,6 +2,7 @@ class Neighborhood < ApplicationRecord
   
   has_many :blocks 
   has_many :cleanings, through: :blocks 
+  has_many :events
 
   mount_uploader :photo, PhotoUploader
 

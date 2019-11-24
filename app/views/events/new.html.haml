@@ -1,0 +1,14 @@
+%h2.text-center
+  Create a new Cleaning Event
+.row
+  =simple_form_for @event, url: neighborhood_events_path(@event.neighborhood) do |f|
+    .col-md-3
+    .col-md-6
+      .row
+        =f.input :name, label: false, label: "Name"
+        =f.input :description, label: false, label: "Description"
+
+%br
+.row.text-center
+  %button.btn.btn-info{onclick: "$('#new_event').submit()"}
+    Create New Event
