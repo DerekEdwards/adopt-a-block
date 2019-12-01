@@ -1,0 +1,6 @@
+%h2.text-center
+  ="Update #{@event.name}"
+.row
+  =simple_form_for @event, url: neighborhood_event_path(@event.neighborhood, @event), method: :patch do |f|
+    =render partial: 'event_form', locals: {f: f}
+

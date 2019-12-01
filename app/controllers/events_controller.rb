@@ -13,8 +13,20 @@ class EventsController < ApplicationController
     @event.neighborhood = Neighborhood.find(params[:neighborhood_id])
     if @event.save
       redirect_to neighborhood_path @event.neighborhood
-    else
-      redirect_to 'www.google.com'
+    end
+  end
+
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @event.update(event_params)
+    @event.user = current_user
+    @event.neighborhood = Neighborhood.find(params[:neighborhood_id])
+    if @event.save
+      redirect_to neighborhood_path @event.neighborhood
     end
   end
 

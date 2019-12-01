@@ -4,7 +4,7 @@
     =@neighborhood.name
   -if current_user and current_user.admin
     .row
-      .col-md-4
+      .col-md-3
       .col-md-2.text-center
         =link_to edit_neighborhood_path(@neighborhood) do
           %i.fa.fa-edit
@@ -13,6 +13,10 @@
         =link_to new_neighborhood_block_path(@neighborhood) do
           %i.fa.fa-plus-circle
           Create Block
+      .col-md-2.text-center
+        =link_to new_neighborhood_event_path(@neighborhood) do
+          %i.fa.fa-plus-circle
+          Create Event
     %br
   %div.h4.text-center.no-padding
     =@neighborhood.description
@@ -32,25 +36,7 @@
     %h3.text-center Upcoming Event   
 
   -@upcoming_events.each do |event|
-    .row 
-      .col-md-2
-      .col-md-8
-        .alert.alert-info{role: "alert"}
-          %h4.alert-heading 
-            =event.name
-          %p 
-            =event.description
-          %hr
-          .row
-            .col-md-4
-              %i.fa.fa-map-marker
-              =event.location_description
-            .col-md-8.text-right
-              %i.fa.fa-calendar
-              =event.event_date.strftime("%A %B, %e") 
-              &nbsp;
-              %i.fa.fa-clock-o
-              =event.duration
+    =render partial: 'events/event_panel', locals: {event: event}
 
 
 = content_tag "div", id: "map", data: {blocks: @map_hash, lat: @neighborhood.lat, lng: @neighborhood.lng, zoom: @neighborhood.zoom} do

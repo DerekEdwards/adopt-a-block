@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   resources :neighborhoods do
     resources :blocks, only: [:new, :create]
-    resources :events, only: [:new, :create]
+    resources :events, only: [:new, :create, :edit, :update]
   end
 
   resources :blocks, only: [:show, :edit, :update, :destroy]
