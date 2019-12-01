@@ -21,7 +21,13 @@ class UserMailer < ApplicationMailer
 
   def updated_event_email event
     @event = event
-    mail(to: event.neighborhood.mailing_list, subject: "Update on #{event.name}")
+
+    subject = "Update on #{event.name}"
+    if @event.canceled
+      subject = "CANCELED #{event.name}"
+    end
+
+    mail(to: event.neighborhood.mailing_list, subject: subject)
   end
 
 end

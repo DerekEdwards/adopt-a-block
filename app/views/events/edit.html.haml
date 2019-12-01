@@ -16,6 +16,10 @@
     .row
       .col-md-12
         =f.input :canceled, as: :hidden, input_html: { value: true }
+    .row
+      .col-md-12
+        =simple_fields_for :other do |o|
+          =o.input :send_emails, as: :hidden, input_html: { value: "1" }
     .row 
       .col-md-12.text-center
         =f.button :submit, "Cancel Event", class: 'btn btn-danger btn-xs', data: {confirm: "Are you sure you want to cancel this #{@event.name}? This action cannot be undone."}

@@ -1,8 +1,13 @@
 %center
-  %h2{:style => "text-decoration:none; color:#58616c;"}
-    ="Updates have been made to #{@event.neighborhood.name}"
-  %h3{:style => "text-decoration:none; color:#58616c;"}
-    ="Some details about this event may have changed."
+
+  -if @event.canceled
+    %h2{:style => "text-decoration:none; color:#b30000;"}
+      ="#{@event.name} has been CANCELED"
+  -else
+    %h2{:style => "text-decoration:none; color:#58616c;"}
+      ="Updates have been made to #{@event.name}"
+    %h3{:style => "text-decoration:none; color:#58616c;"}
+      ="Some details about this event may have changed."
   %h4{:style => "text-decoration:none; color:#58616c;"}
     ="Organized by "
     =mail_to @event.user.email, @event.user.name
