@@ -1,7 +1,9 @@
 %h4.alert-heading 
   -if event.canceled
+    %i.fa.fa-users
     ="#{event.name} CANCELED"
   -else
+    %i.fa.fa-users
     =event.name
   -if current_user and current_user.admin
     =link_to edit_neighborhood_event_path(event.neighborhood, event) do
