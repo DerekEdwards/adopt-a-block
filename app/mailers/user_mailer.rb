@@ -13,4 +13,10 @@ class UserMailer < ApplicationMailer
     mail(to: block.user.email, subject: 'Your block has been automatically un-adopted.')
   end
 
+
+  def new_event_email event
+    @event = event
+    mail(to: event.neighborhood.mailing_list, subject: event.name)
+  end
+
 end
