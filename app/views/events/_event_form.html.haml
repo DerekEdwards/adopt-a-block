@@ -16,6 +16,10 @@
   .row
     .col-md-12
       =f.input :description
+  .row
+    .col-md-12
+      =simple_fields_for :other do |o|
+        =o.input :send_emails, as: :boolean, label: "Send Email to Neighborhood Users"
   .row 
     .col-md-12
       =f.button :submit

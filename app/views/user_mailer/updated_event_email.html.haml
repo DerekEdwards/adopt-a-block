@@ -1,0 +1,33 @@
+%center
+  %h2{:style => "text-decoration:none; color:#58616c;"}
+    ="Updates have been made to #{@event.neighborhood.name}"
+  %h3{:style => "text-decoration:none; color:#58616c;"}
+    ="Some details about this event may have changed."
+  %h4{:style => "text-decoration:none; color:#58616c;"}
+    ="Organized by "
+    =mail_to @event.user.email, @event.user.name
+    
+%div.email-body{ :style => "border-radius: 25px; padding: 20px; border: 2px solid #58616c;" }
+  %center
+    %h1
+      =@event.name
+
+    %div{:style => "color:#000000;"}
+      =@event.description.html_safe
+
+    %hr{ :style => "border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));"}
+
+    %h2{:style => "text-decoration:none; color:#000000;"}
+      =@event.event_date.strftime("%A %B, %e")
+      %br
+      =@event.duration
+      %br
+      ="at"
+      %br
+      =@event.location_description
+
+
+%center
+  =link_to "CleanBoston.org", root_url, only_path: false, :style => "text-decoration:none; font-weight:bold;color:#58616c;word-spacing:2pt;font-size:20px;"
+  %div{ :style => "text-decoration:none;color:#58616c;font-size:14px;"}
+    Because Litter Sucks

@@ -12,7 +12,9 @@ class EventsController < ApplicationController
     @event.user = current_user
     @event.neighborhood = Neighborhood.find(params[:neighborhood_id])
     if @event.save
-      SendNewEventEmailsJob.perform_later @event
+      if other_params[:send_emails] == "1"
+        SendNewEventEmailsJob.perform_later @event
+      end
       redirect_to neighborhood_path @event.neighborhood
     end
   end
@@ -24,14 +26,19 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     @event.update(event_params)
-    @event.user = current_user
-    @event.neighborhood = Neighborhood.find(params[:neighborhood_id])
     if @event.save
+      if other_params[:send_emails] == "1"
+        SendUpdatedEventEmailsJob.perform_later @event
+      end
       redirect_to neighborhood_path @event.neighborhood
     end
   end
 
   private
+
+  def other_params
+    params.require(:other).permit(:send_emails)
+  end
 
   def event_params
     params.require(:event).permit(:name, :location_description, :description, :event_date, :start_time, :end_time, :canceled)
