@@ -22,4 +22,12 @@ class Neighborhood < ApplicationRecord
   def center
     return {lat: lat.to_f, lng: lng.to_f}
   end
+
+  # Get a list of emails relevant to the blocks.
+  # Currently, this is only people who have actively adopted blocks
+  # Later, this should be people who have subscribed to block updates.
+  # Also, don't include people who have turned off block notifications
+  def mailing_list
+     blocks.where.not(user: nil).map{ |x| x.user.email }.uniq  
+  end
 end

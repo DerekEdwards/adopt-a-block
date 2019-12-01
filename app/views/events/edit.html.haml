@@ -18,4 +18,7 @@
         =f.input :canceled, as: :hidden, input_html: { value: true }
     .row 
       .col-md-12.text-center
-        =f.button :submit, "Cancel", class: 'btn btn-danger btn-xs', data: {confirm: "Are you sure you want to cancel this #{@event.name}? This action cannot be undone."}
+        =f.button :submit, "Cancel Event", class: 'btn btn-danger btn-xs', data: {confirm: "Are you sure you want to cancel this #{@event.name}? This action cannot be undone."}
+    .row
+      .col-md-12.text-center
+        %p DANGER! Do not press this button, unless you want to cancel this event.
