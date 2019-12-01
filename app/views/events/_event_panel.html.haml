@@ -1,22 +1,9 @@
 .row 
   .col-md-2
   .col-md-8
-    .alert.alert-info{role: "alert"}
-      %h4.alert-heading 
-        =event.name
-        -if current_user and current_user.admin
-          =link_to edit_neighborhood_event_path(event.neighborhood, event) do
-            %i.fa.fa-edit
-      %p 
-        =event.description
-      %hr
-      .row
-        .col-md-6
-          %i.fa.fa-map-marker
-          =event.location_description
-        .col-md-6.text-right
-          %i.fa.fa-calendar
-          =event.event_date.strftime("%A %B, %e") 
-          &nbsp;
-          %i.fa.fa-clock-o
-          =event.duration
+    -if event.canceled
+      .alert.alert-danger{role: "alert"}
+        =render partial: 'events/event_panel_inner', locals: {event: event}
+    -else
+      .alert.alert-info{role: "alert"}
+        =render partial: 'events/event_panel_inner', locals: {event: event}

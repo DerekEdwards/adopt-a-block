@@ -1,6 +1,21 @@
 %h2.text-center
   ="Update #{@event.name}"
+-if @event.canceled
+  %h4.text-center.red-background
+    This event has been canceled  
 .row
   =simple_form_for @event, url: neighborhood_event_path(@event.neighborhood, @event), method: :patch do |f|
     =render partial: 'event_form', locals: {f: f}
 
+-unless @event.canceled 
+  %br
+  %br
+  %br
+  %hr
+  =simple_form_for @event, url: neighborhood_event_path(@event.neighborhood, @event), method: :patch do |f|
+    .row
+      .col-md-12
+        =f.input :canceled, as: :hidden, input_html: { value: true }
+    .row 
+      .col-md-12.text-center
+        =f.button :submit, "Cancel", class: 'btn btn-danger btn-xs', data: {confirm: "Are you sure you want to cancel this #{@event.name}? This action cannot be undone."}
