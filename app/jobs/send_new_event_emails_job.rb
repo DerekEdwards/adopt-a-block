@@ -1,7 +1,9 @@
 class SendNewEventEmailsJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
-    # Do something later
+  def perform event
+    UserMailer.new_event_email(event).deliver!
   end
 end
+
+
