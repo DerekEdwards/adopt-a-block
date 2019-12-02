@@ -14,26 +14,22 @@ class UserMailer < ApplicationMailer
   end
 
 
-  def new_event_email event
+  def new_event_email event, user
     @event = event
-    @event.neighborhood.mailing_list.each do |user|
-      @user = user
-      mail(to: user.email, subject: event.name)
-    end
+    @user = user
+    mail(to: user.email, subject: event.name)
   end
 
-  def updated_event_email event
+  def updated_event_email event, user
     @event = event
+    @user = user
 
     subject = "Update on #{event.name}"
     if @event.canceled
       subject = "CANCELED #{event.name}"
     end
 
-    @event.neighborhood.mailing_list.each do |user|
-      @user = user
-      mail(to: user.email, subject: subject)
-    end
+    mail(to: user.email, subject: subject)
 
   end
 

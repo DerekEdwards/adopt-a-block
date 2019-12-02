@@ -2,7 +2,9 @@ class SendNewEventEmailsJob < ApplicationJob
   queue_as :default
 
   def perform event
-    UserMailer.new_event_email(event).deliver!
+    event.neighborhood.mailing_list.each do |user|
+      UserMailer.new_event_email(event, user).deliver!
+    end
   end
 end
 
