@@ -37,6 +37,11 @@
                 =block.days_since_cleaned
 
 .div#data-user-id{data: {user_id: @user.id}}
+
+.col-md-12
+  %h2.text-center
+    Email Settings
+
 -if @user.blocks.count > 0
   .row.text-center.question
     .question
@@ -44,6 +49,13 @@
     %label.switch#reminder-email
       %input{type: "checkbox", checked: "#{@user.subscribed_to_reminders}" == "true"}
       %span.slider.round
+
+.row.text-center.question
+  .question
+    Subscribe to Neighborhood Updates
+  %label.switch#update-email
+    %input{type: "checkbox", checked: "#{@user.subscribed_to_neighborhood_updates}" == "true"}
+    %span.slider.round
 
 
 
@@ -53,6 +65,15 @@
 
     $.ajax({
       url: '/users/' + userId + '/toggle_reminders',
+      type: 'GET',
+    });
+  });
+
+  $("#update-email").change(function(){
+    var userId = $('#data-user-id').data('userId');
+
+    $.ajax({
+      url: '/users/' + userId + '/toggle_updates',
       type: 'GET',
     });
   });

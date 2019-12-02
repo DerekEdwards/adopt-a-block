@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190521015922) do
+ActiveRecord::Schema.define(version: 20191201233531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,13 +47,20 @@ ActiveRecord::Schema.define(version: 20190521015922) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description"
-    t.datetime "start", null: false
-    t.datetime "end", null: false
-    t.string "location", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.text "location_description", null: false
+    t.date "event_date", null: false
+    t.time "start_time", null: false
+    t.time "end_time", null: false
+    t.string "photo_url"
+    t.bigint "user_id"
+    t.bigint "neighborhood_id"
+    t.boolean "canceled", default: false, null: false
+    t.index ["neighborhood_id"], name: "index_events_on_neighborhood_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "neighborhoods", force: :cascade do |t|
@@ -85,6 +92,7 @@ ActiveRecord::Schema.define(version: 20190521015922) do
     t.string "name"
     t.boolean "admin", default: false
     t.boolean "subscribed_to_reminders", default: true
+    t.boolean "subscribed_to_neighborhood_updates", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

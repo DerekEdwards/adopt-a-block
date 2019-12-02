@@ -1,0 +1,9 @@
+.row 
+  .col-md-2
+  .col-md-8
+    -if event.canceled
+      .alert.alert-danger{role: "alert"}
+        =render partial: 'events/event_panel_inner', locals: {event: event}
+    -else
+      .alert.alert-info{role: "alert"}
+        =render partial: 'events/event_panel_inner', locals: {event: event}

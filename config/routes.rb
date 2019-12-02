@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users do 
     member do 
       get 'toggle_reminders' #TODO Remove this custom function, and use user update
+      get 'toggle_updates'
     end
   end
 
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   
   resources :neighborhoods do
     resources :blocks, only: [:new, :create]
+    resources :events, only: [:new, :create, :edit, :update]
   end
 
   resources :blocks, only: [:show, :edit, :update, :destroy]

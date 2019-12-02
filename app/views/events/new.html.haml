@@ -1,0 +1,5 @@
+%h2.text-center
+  Create a new Cleaning Event
+.row
+  =simple_form_for @event, url: neighborhood_events_path(@event.neighborhood) do |f|
+    =render partial: 'event_form', locals: {f: f}

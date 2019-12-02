@@ -1,0 +1,34 @@
+%h4.alert-heading 
+  -if event.canceled
+    %i.fa.fa-users
+    ="#{event.name} CANCELED"
+  -else
+    %i.fa.fa-users
+    =event.name
+  -if current_user and current_user.admin
+    =link_to edit_neighborhood_event_path(event.neighborhood, event) do
+      %i.fa.fa-edit
+%p 
+  =event.description.html_safe
+%hr
+.row
+  -if event.canceled
+    .col-md-6.strikeout
+      %i.fa.fa-map-marker
+      =event.location_description
+    .col-md-6.text-right.strikeout
+      %i.fa.fa-calendar
+      =event.event_date.strftime("%A %B, %e") 
+      &nbsp;
+      %i.fa.fa-clock-o
+      =event.duration
+  -else
+    .col-md-6
+      %i.fa.fa-map-marker
+      =event.location_description
+    .col-md-6.text-right
+      %i.fa.fa-calendar
+      =event.event_date.strftime("%A %B, %e") 
+      &nbsp;
+      %i.fa.fa-clock-o
+      =event.duration
