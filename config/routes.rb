@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users do 
     member do 
       get 'toggle_reminders' #TODO Remove this custom function, and use user update
+      get 'toggle_updates'
     end
   end
 

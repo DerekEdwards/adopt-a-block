@@ -23,11 +23,11 @@ class Neighborhood < ApplicationRecord
     return {lat: lat.to_f, lng: lng.to_f}
   end
 
-  # Get a list of emails relevant to the blocks.
+  # Get a list of users relevant to the blocks.
   # Currently, this is only people who have actively adopted blocks
   # Later, this should be people who have subscribed to block updates.
   # Also, don't include people who have turned off block notifications
   def mailing_list
-     blocks.where.not(user: nil).map{ |x| x.user.email }.uniq  
+     blocks.joins(:user).where.not(user_id: nil).where('users.subscribed_to_neighborhood_updates = ?', true).map{ |x| x.user}.uniq  
   end
 end

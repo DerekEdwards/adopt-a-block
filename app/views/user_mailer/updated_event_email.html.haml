@@ -36,3 +36,7 @@
   =link_to "CleanBoston.org", root_url, only_path: false, :style => "text-decoration:none; font-weight:bold;color:#58616c;word-spacing:2pt;font-size:20px;"
   %div{ :style => "text-decoration:none;color:#58616c;font-size:14px;"}
     Because Litter Sucks
+
+%br
+%center
+  = link_to "Click here to unsubscribe from these emails", "#{toggle_updates_user_url(@user)}", :style => "text-decoration:none; font-weight:bold;color:#58616c;word-spacing:2pt;font-size:15;"
