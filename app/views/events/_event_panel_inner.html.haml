@@ -9,7 +9,7 @@
     =link_to edit_neighborhood_event_path(event.neighborhood, event) do
       %i.fa.fa-edit
 %p 
-  =event.description
+  =event.description.html_safe
 %hr
 .row
   -if event.canceled
