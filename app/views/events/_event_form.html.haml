@@ -19,7 +19,7 @@
   .row
     .col-md-12
       =simple_fields_for :other do |o|
-        =o.input :send_emails, as: :boolean, label: "Send Email to Neighborhood Users"
+        =o.input :send_emails, as: :boolean, label: "Send Email to Neighborhood Users", input_html: {checked: true}
   .row 
     .col-md-12
       =f.button :submit
