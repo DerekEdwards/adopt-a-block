@@ -15,7 +15,7 @@
     %h5.text-center
       ="This block has been adopted by "
       =mail_to @block.user.email,  "#{@block.user.name}"
-      =" until #{@block.adoption_expiration.strftime('%b %e')}."
+      =" until #{@block.end_of_adoption.strftime('%b %e')}."
 
     // Clean Button
     %br

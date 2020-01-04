@@ -10,6 +10,7 @@ class UserMailer < ApplicationMailer
 
   def unadopt_email block
     @block = block
+    @days = block.days_adopted
     mail(to: block.user.email, subject: 'Your block has been automatically un-adopted.')
   end
 
