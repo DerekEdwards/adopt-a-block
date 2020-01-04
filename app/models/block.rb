@@ -32,8 +32,17 @@ class Block < ApplicationRecord
     return lc.days_since_cleaned
   end
 
+  def days_adopted
+    if self.adopted_since and self.end_of_adoption
+      return ((end_of_adoption - adopted_since)/86400).to_i
+    else
+      return nil
+    end
+  end
+
   def adopt user
     self.user = user
+    self.adopted_since = Time.now
     self.adoption_expiration = Time.now + 3.months
     self.save 
   end
@@ -43,6 +52,7 @@ class Block < ApplicationRecord
       UserMailer.unadopt_email(self).deliver!
     end
     self.user = nil
+    self.adopted_since = nil
     self.adoption_expiration = nil
     self.save
   end
@@ -53,9 +63,21 @@ class Block < ApplicationRecord
 
   def adopted_description
     if user and adoption_expiration
-      return "This block is adopted by #{user.name} until #{self.adoption_expiration.strftime('%b %e')}."
+      return "This block is adopted by #{user.name} until #{self.end_of_adoption.strftime('%b %e')}."
     elsif user
       return "This block is adopted by #{user.name}."
+    end
+  end
+
+  def end_of_adoption
+    if adoption_expiration 
+      if last_cleaned
+        return [self.adoption_expiration, last_cleaned + 3.months].max
+      else
+        return self.adoption_expiration
+      end
+    else
+      return nil
     end
   end
 

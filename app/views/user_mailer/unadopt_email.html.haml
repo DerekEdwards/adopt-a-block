@@ -2,11 +2,11 @@
   ="#{@block.name} has been un-adopted." 
 
 %h4
-  ="Thank you for taking care of this block for the past 90 days."
+  ="Thank you for taking care of this block for the past #{@days} days."
   
--if @block.cleanings_past_x_days(90) > 2  
+-if @block.cleanings_past_x_days(@days) > 2  
   %h4
-    ="Your block was cleaned #{@block.cleanings_past_x_days(90)} times in the past 90 days. Your hard work is greatly appreciated."  
+    ="Your block was cleaned #{@block.cleanings_past_x_days(@days)} times in the past #{@days} days. Your hard work is greatly appreciated."  
   
 %h2
   If you want to re-adopt this block, 

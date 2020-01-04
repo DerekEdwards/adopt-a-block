@@ -6,23 +6,16 @@
       =simple_form_for @new_cleaning, url: cleanings_path do |f|
         .modal-header
           %button.close{"data-dismiss" => "modal", type: "button"} ×
-          %h4.modal-title So you want to adopt this block?
+          %h4.modal-title="Adopt #{@block.name}"
         .modal-body
           %p
-            All you need to do is clean this block once every 10 days or so for 3 months.
+            All you need to do is commit to cleaning this block once every week or two.
           %p
-            Ideally, this should take no more than 20 minutes.
+            Each time you clean it, be sure to mark it as clean.
           %p
-            After 3 months, you can sign up again or let someone else adopt the block.
+            You can un-adopt this block at any time (no judgement).
         
-          -if current_user 
-            %p
-              What do you say?  
-            %p 
-              ="Click Adopt to accept the challenge and make #{@block.neighborhood.name} an even better place to live."
-            %p.fine-print
-              You can un-adopt this block at any time.
-          -else 
+          -if current_user == nil
             %p
               Click Login or Sign Up below to adopt this block.
 
