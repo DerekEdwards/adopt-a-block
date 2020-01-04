@@ -34,6 +34,7 @@ class Block < ApplicationRecord
 
   def adopt user
     self.user = user
+    self.adopted_since = Time.now
     self.adoption_expiration = Time.now + 3.months
     self.save 
   end
