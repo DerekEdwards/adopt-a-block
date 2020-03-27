@@ -5,34 +5,15 @@
     .modal-content.text-center
       .modal-header
         %button.close{"data-dismiss" => "modal", type: "button"} ×
-        %h4.modal-title="Get News About #{@neighborhood.name}"
-        //.modal-body
-        //%p
-        //  Click Follow to get news about cleanings in this neighborhood.
-
-        //-if current_user == nil
-        //  %p
-        //    Click Login or Sign Up below to adopt this block.
-
+        %h4.modal-title="Follow #{@neighborhood.name}"
+      .modal-body
+        %h5
+          ="Login or Sign Up to Get News and Alerts about #{@neighborhood.name}."
       .modal-footer.text-center
         %button.text-center.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
-        -if current_user
-          =link_to follow_neighborhood_path(@neighborhood), method: :post do
-            %button.btn.btn-info
-              Follow
-        
-        //-else 
-        //  =link_to new_user_session_path(block_id: @block.id) do
-        //    %button.btn.btn-info
-        //      Login
-        //  =link_to new_user_registration_path(block_id: @block.id) do 
-        //    %button.btn.btn-info
-        //      Sign Up
-
-:javascript
-  $(document).ready(function() {  
-    var modals = ['#adoptModal'];
-    if (window.location.hash && ~modals.indexOf(window.location.hash)) {
-       $(window.location.hash).modal();
-    }
-  })
+        =link_to new_user_session_path(neighborhood_id: @neighborhood.id) do
+          %button.btn.btn-info
+            Login
+        =link_to new_user_registration_path(neighborhood_id: @neighborhood.id) do 
+          %button.btn.btn-info
+            Sign Up

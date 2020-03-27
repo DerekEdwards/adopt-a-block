@@ -3,7 +3,7 @@
   %div.h1.text-center.no-padding
     =@neighborhood.name
   // Follow this Neighborhood
-  %div.row.h4.text-center.no-padding
+  %div.row.h4.text-center
     -if current_user and not current_user.follows? @neighborhood
       =link_to follow_neighborhood_path(@neighborhood), method: :post do
         %button.btn.btn-info.btn-xs
@@ -12,9 +12,9 @@
       =link_to unfollow_neighborhood_path(@neighborhood), method: :post do
         %button.btn.btn-danger.btn-xs
           Stop Following
-      //.col-md-12.text-center
-      //=render partial: 'follow_modal'
-      //%button.btn.btn-xs.btn-info{"data-target" => "#followModal", "data-toggle" => "modal", type: "button"} Follow
+    -else #not logged in
+      =render partial: 'follow_modal'
+      %button.btn.btn-xs.btn-info{"data-target" => "#followModal", "data-toggle" => "modal", type: "button"} Follow
   %br
   -if current_user and current_user.admin
     .row

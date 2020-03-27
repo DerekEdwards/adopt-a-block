@@ -30,8 +30,9 @@ class Neighborhood < ApplicationRecord
   # Later, this should be people who have subscribed to block updates.
   # Also, don't include people who have turned off block notifications
   def mailing_list
-    adopters = blocks.joins(:user).where.not(user_id: nil).where('users.subscribed_to_neighborhood_updates = ?', true).map{ |x| x.user}
-    (adopters + followers.to_a).uniq
+    my_adopters = blocks.joins(:user).where.not(user_id: nil).where('users.subscribed_to_neighborhood_updates = ?', true).map{ |x| x.user}
+    my_followers = followers.where(subscribed_to_neighborhood_updates: true).to_a
+    (my_adopters + my_followers).uniq
   end
 
   ## Add Follower

@@ -8,6 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     @block_id = params[:block_id]
+    @neighborhood_id =  params[:neighborhood_id]
     super
   end
 
@@ -18,6 +19,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @block = Block.find(params[:block_id])
       @block.adopt current_user
       @block.save
+    end
+
+    if params[:neighborhood_id]
+      @neighborhood = Neighborhood.find(params[:neighborhood_id])
+      @neighborhood.add_follower current_user
     end
   end
 

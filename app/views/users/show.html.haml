@@ -10,21 +10,9 @@
   ="Member since #{@user.created_at.strftime('%B %Y')}."
 
 .col-md-12
-  %h2.text-center
-    Your Blocks
-
-  -if @user.blocks.count == 0
-    %h4.text-center You have not adopted any blocks.
-    %hr
-    %h5.text-center Find your neighborhood to get started
-    -@neighborhoods.each do |neighborhood|
-      .row.text-center
-        %br
-        .col-md-12
-          %h3
-            =link_to neighborhood_path(neighborhood) do 
-              =neighborhood.name
-  -else
+  -if @user.blocks.count > 0
+    %h2.text-center
+      Your Blocks
     -@user.blocks.each do |block|
       =link_to block_path(block) do
         .row
@@ -35,6 +23,20 @@
                 =block.name
               %div.text-center
                 =block.days_since_cleaned
+
+.col-md-12
+  -if @user.neighborhoods.count > 0
+    %h2.text-center
+      Your Neighborhoods
+    -@user.neighborhoods.each do |neighborhood|
+      =link_to neighborhood_path(neighborhood) do
+        .row
+          .col-md-4
+          .col-md-4
+            .well.hover{class: "green-background"}
+              %h4.text-center
+                =neighborhood.name
+
 
 .div#data-user-id{data: {user_id: @user.id}}
 
