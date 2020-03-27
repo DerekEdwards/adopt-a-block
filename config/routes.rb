@@ -16,6 +16,13 @@ Rails.application.routes.draw do
     resources :blocks, only: [:new, :create]
     resources :events, only: [:new, :create, :edit, :update]
   end
+  
+  resources :neighborhoods do
+    member do
+      post 'follow'
+      post 'unfollow'
+    end
+  end
 
   resources :blocks, only: [:show, :edit, :update, :destroy]
   resources :blocks do
