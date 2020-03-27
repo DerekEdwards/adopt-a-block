@@ -1,0 +1,19 @@
+/ Modal
+#followModal.modal.no-padding.fade{role: "dialog"}
+  .modal-dialog
+    / Modal content
+    .modal-content.text-center
+      .modal-header
+        %button.close{"data-dismiss" => "modal", type: "button"} ×
+        %h4.modal-title="Follow #{@neighborhood.name}"
+      .modal-body
+        %h5
+          ="Login or Sign Up to Get News and Alerts about #{@neighborhood.name}."
+      .modal-footer.text-center
+        %button.text-center.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
+        =link_to new_user_session_path(neighborhood_id: @neighborhood.id) do
+          %button.btn.btn-info
+            Login
+        =link_to new_user_registration_path(neighborhood_id: @neighborhood.id) do 
+          %button.btn.btn-info
+            Sign Up

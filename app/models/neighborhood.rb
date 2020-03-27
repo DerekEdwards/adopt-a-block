@@ -3,6 +3,8 @@ class Neighborhood < ApplicationRecord
   has_many :blocks 
   has_many :cleanings, through: :blocks 
   has_many :events
+  has_and_belongs_to_many :users
+
 
   mount_uploader :photo, PhotoUploader
 
@@ -28,6 +30,25 @@ class Neighborhood < ApplicationRecord
   # Later, this should be people who have subscribed to block updates.
   # Also, don't include people who have turned off block notifications
   def mailing_list
-     blocks.joins(:user).where.not(user_id: nil).where('users.subscribed_to_neighborhood_updates = ?', true).map{ |x| x.user}.uniq  
+    my_adopters = blocks.joins(:user).where.not(user_id: nil).where('users.subscribed_to_neighborhood_updates = ?', true).map{ |x| x.user}
+    my_followers = followers.where(subscribed_to_neighborhood_updates: true).to_a
+    (my_adopters + my_followers).uniq
   end
+
+  ## Add Follower
+  def add_follower user
+    unless user.in? users 
+      users << user 
+    end
+  end
+
+  ## Remove Follower
+  def remove_follower user 
+    users.delete(user)
+  end
+
+  ## Synonym for users
+  def followers
+    users
+  end  
 end

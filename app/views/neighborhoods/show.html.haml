@@ -2,6 +2,20 @@
   %br
   %div.h1.text-center.no-padding
     =@neighborhood.name
+  // Follow this Neighborhood
+  %div.row.h4.text-center
+    -if current_user and not current_user.follows? @neighborhood
+      =link_to follow_neighborhood_path(@neighborhood), method: :post do
+        %button.btn.btn-info.btn-xs
+          Follow
+    -elsif current_user and current_user.follows? @neighborhood  
+      =link_to unfollow_neighborhood_path(@neighborhood), method: :post do
+        %button.btn.btn-danger.btn-xs
+          Stop Following
+    -else #not logged in
+      =render partial: 'follow_modal'
+      %button.btn.btn-xs.btn-info{"data-target" => "#followModal", "data-toggle" => "modal", type: "button"} Follow
+  %br
   -if current_user and current_user.admin
     .row
       .col-md-3
@@ -28,7 +42,6 @@
           =@neighborhood.message.html_safe
   -else
     %br
-
 
   -if @upcoming_events.count > 1
     %h3.text-center Upcoming Events

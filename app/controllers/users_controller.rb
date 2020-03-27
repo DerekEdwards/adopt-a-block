@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
+    set_user
     @neighborhoods = Neighborhood.all 
   end 
 
   #TODO: Make this more secure, more dry, and more Convention over Configuration
   def toggle_reminders
-    @user = User.find(params[:id])
+    set_user
     @user.subscribed_to_reminders = !@user.subscribed_to_reminders
     @user.save
     respond_to do |format|
@@ -16,9 +16,9 @@ class UsersController < ApplicationController
     end
   end
 
-    #TODO: Make this more secure, more dry, and more Convention over Configuration
+  #TODO: Make this more secure, more dry, and more Convention over Configuration
   def toggle_updates
-    @user = User.find(params[:id])
+    set_user
     @user.subscribed_to_neighborhood_updates = !@user.subscribed_to_neighborhood_updates
     @user.save
     respond_to do |format|
@@ -26,5 +26,12 @@ class UsersController < ApplicationController
       format.js
     end
   end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
 
 end
