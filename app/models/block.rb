@@ -44,7 +44,14 @@ class Block < ApplicationRecord
     self.user = user
     self.adopted_since = Time.now
     self.adoption_expiration = Time.now + 3.months
-    self.save 
+    result = self.save 
+
+    # Let admins know that a block has been adoapted
+    User.admin.each do |admin|
+      UserMailer.new_adoption_alert(self, admin).deliver!
+    end
+
+    result 
   end
 
   def unadopt send_email=false

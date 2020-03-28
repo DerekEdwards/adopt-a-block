@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :events
   has_and_belongs_to_many :neighborhoods
 
+  scope :admin, ->{ where(admin: true) }
+
   ## Follow neighborhood
   def follow neighborhood
     neighborhood.add_follower self 

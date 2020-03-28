@@ -34,4 +34,12 @@ class UserMailer < ApplicationMailer
 
   end
 
+  def new_adoption_alert block, admin
+    @block = block
+    @user = block.user
+    @neighborhood = block.neighborhood
+    @admin = admin 
+    mail(to: admin.email, subject: "Block adopted in #{@neighborhood.name}")
+  end
+
 end

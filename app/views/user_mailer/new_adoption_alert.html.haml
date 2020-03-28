@@ -1,0 +1,11 @@
+%h1
+  ="A block has been adopted in #{@neighborhood.name}."
+%h4 
+  ="#{@block.name} has been adopted by #{@user.name}: #{@user.email}." 
+
+%p
+  Only admins receive these alerts.
+
+%h4
+  =link_to root_url do
+    www.CleanBoston.org 
