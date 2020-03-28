@@ -17,7 +17,7 @@ before_script:
 #- sudo apt-get install postgresql-9.3-postgis-2.1
 ###############################################################
 
-- psql -U postgres -c "create extension postgis"
+#- psql -U postgres -c "create extension postgis"
 
 script:
 #- bundle exec /usr/bin/env RAILS_ENV=test rake db:drop
