@@ -5,6 +5,7 @@ RSpec.describe Neighborhood, type: :model do
   let(:my_neighborhood) { FactoryBot.create :neighborhood }
   let(:my_neighborhood_with_block) { FactoryBot.create :neighborhood_with_block }
   let(:user) { FactoryBot.create :user }
+  let(:user2) { FactoryBot.create :user2 }
   let!(:admin) { FactoryBot.create :admin }
 
   it { should respond_to :name }
@@ -47,10 +48,20 @@ RSpec.describe Neighborhood, type: :model do
   end
 
   it 'knows how to generate a mailing list' do 
+    # Initially there are not followers
     expect(my_neighborhood_with_block.mailing_list.count).to eq(0)
+    
+    # One of the blocks is adopted
+    block = my_neighborhood_with_block.blocks.first 
+    block.adopt(user2, false)
+    expect(my_neighborhood_with_block.mailing_list.count).to eq(1)
+     expect(my_neighborhood_with_block.mailing_list).to include(user2)
+    
+    # A Follower is added
     my_neighborhood_with_block.add_follower user 
     expect(my_neighborhood_with_block.mailing_list).to include(user)
-    expect(my_neighborhood_with_block.mailing_list.count).to eq(1)
+    expect(my_neighborhood_with_block.mailing_list).to include(user)
+    expect(my_neighborhood_with_block.mailing_list.count).to eq(2)
   end
 
   it 'can have blocks' do
