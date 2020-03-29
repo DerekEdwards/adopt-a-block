@@ -29,7 +29,7 @@ RSpec.describe Block, type: :model do
     expect(my_block.cleanings.count).to eq(1)
     cleaning = my_block.cleanings.first
     expect(cleaning.note).to eq("Note")
-    expect(cleaning.time).to eq(now)
+    expect(cleaning.time.to_s).to eq(now.to_s)
   end 
 
   it 'knows its most recent cleaning' do
@@ -53,7 +53,7 @@ RSpec.describe Block, type: :model do
     my_block.clean("last_month", last_month)
 
     expect(my_block.cleanings.count).to eq(3)
-    expect(my_block.last_cleaned).to eq(now)
+    expect(my_block.last_cleaned.to_s).to eq(now.to_s)
   end 
 
   it 'knows if it was never cleaned' do
