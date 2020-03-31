@@ -15,7 +15,7 @@ FactoryBot.define do
 
     factory :admin do
       name { "Admin" }
-      email { "Admin@example.com" }
+      email { "AdminUser@example.com" }
       admin { true }
     end
 
