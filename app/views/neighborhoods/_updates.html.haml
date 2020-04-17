@@ -6,6 +6,8 @@
   =render partial: 'charts'
 
 .row.grey-background
+
+  // Status of Blocks
   .col-md-5
 
     %h2.text-center Adopted Blocks
@@ -25,6 +27,7 @@
           =block.name
 
 
+  // Recent Activity
   .col-md-7
     .row
       .col-md-1
@@ -40,7 +43,17 @@
             =cleaning.note
             =link_to block_path(cleaning.block) do 
               =render partial: 'blocks/cleaning_photos', locals: {cleaning: cleaning}
+          -cleaning.comments.each do |comment|
+            .row
+              .col-md-1
+              .col-md-10
+                .well.text-center
+                  =comment.message
+
+
           %hr{style: "border-color:gray;", width:"50%"}
+
+
 
 
        
