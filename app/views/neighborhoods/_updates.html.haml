@@ -43,12 +43,38 @@
             =cleaning.note
             =link_to block_path(cleaning.block) do 
               =render partial: 'blocks/cleaning_photos', locals: {cleaning: cleaning}
+
+          %br 
           -cleaning.comments.each do |comment|
-            .row
-              .col-md-1
-              .col-md-10
-                .well.text-center
-                  =comment.message
+            .panel.translucent{id: 'global_comment_' + comment.id.to_s}
+              .panel-body.event-comment.text-center 
+                %div.row
+                  %div
+                    .col-md-3{style: "valign=middle;"}
+                      //-unless comment.user.avatar_url.blank?
+                      //  %img.img-circle{src: comment.user.avatar_url, style: "height: 60px; width: 60px;"}
+                      %div.row
+                        .message-header-text
+                          =comment.user.name
+                      %div.row
+                        .message-time-text
+                          =comment.created_at.strftime("%B %-d, %Y")
+                      %div.row
+                        .message-time-text
+                          =comment.created_at.strftime("%-I:%M%p")
+                    .col-md-9  
+                      %div{id: 'comment_' + comment.id.to_s}
+                        .col-md-12.text-left
+                          .message-body-text
+                            -unless comment.message.blank?
+                              =comment.message
+                              //=comment.body_html || comment.body.html_safe
+                      //%div{id: 'comment_field_' + comment.id.to_s, :style => "display:none;"}
+                      //  = simple_form_for comment, :url => url_for(:action => 'update', :controller => 'comments'), :method => 'patch', html: { id: 'comment_form_' + comment.id.to_s}, :authenticity_token => true, :remote => true do |f| 
+                      //    =f.input :body, label: false, :input_html => {:style => 'width: 100%', :value => comment.body.gsub("<p>","").gsub("</p>","")}
+                      //    =f.hidden_field :id, value: comment.id
+                      //    =f.hidden_field :rsvp_hash_key, value: @rsvp_hash_key
+
 
 
           %hr{style: "border-color:gray;", width:"50%"}
