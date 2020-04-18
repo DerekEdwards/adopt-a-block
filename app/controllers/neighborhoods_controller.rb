@@ -7,6 +7,7 @@ class NeighborhoodsController < ApplicationController
     @blocks =  @neighborhood.blocks
     @upcoming_events = @neighborhood.events.future.order(:canceled).order(:event_date).limit(3)
     @map_hash = @neighborhood.map_hash
+    @new_comment = Comment.new
   end 
 
   def index

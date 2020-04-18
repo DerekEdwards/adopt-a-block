@@ -31,6 +31,14 @@ Rails.application.routes.draw do
       post 'adopt'
     end
   end
+
+  resources :comments do
+    member do
+      patch 'create'
+      delete 'delete'
+      patch 'update'
+    end
+  end
     
   resources :cleanings, only: [:create, :edit, :update, :destroy]
 
