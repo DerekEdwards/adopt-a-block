@@ -68,6 +68,12 @@
             =cleaning.note
 
         =render partial: 'cleaning_photos', locals: {cleaning: cleaning}
+        .row
+          .col-md-2
+          .col-md-8
+            =render partial: 'shared/comments', locals: {cleaning: cleaning}
+
+
 -else
   .row.text-center
     %h2
