@@ -19,6 +19,21 @@ class CommentsController < ApplicationController
     render json: {result: true}
   end
 
+  def update 
+    @comment = Comment.find(params[:comment][:id].to_i)
+    @comment.message = params[:comment][:message]
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to neighborhood_url(@comment.cleaning.block.neighborhood) }
+        #format.json { render :show, status: :ok, location: @comment.commentable }
+      else
+        format.html { render :edit }
+        #format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def comments_params
