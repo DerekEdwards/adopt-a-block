@@ -45,7 +45,7 @@
               =render partial: 'blocks/cleaning_photos', locals: {cleaning: cleaning}
 
           %br 
-          =render partial: 'shared/comments', locals: {cleaning: cleaning}
+          =render partial: 'shared/comments', locals: {cleaning: cleaning, redirect_path: neighborhood_path(@neighborhood)}
           
 
           %hr{style: "border-color:gray;", width:"50%"}

@@ -2,9 +2,10 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.create(comments_params)
+    @redirect_path = comments_params[:redirect_path] || neighborhood_url(@comment.cleaning.block.neighborhood) 
 
     respond_to do |format|
-      format.html { redirect_to neighborhood_url(@comment.cleaning.block.neighborhood) }
+      format.html { redirect_to @redirect_path }
       #format.json { render :show, status: :ok, location: @comment.commentable }
     end
   end
@@ -37,7 +38,7 @@ class CommentsController < ApplicationController
   private
 
   def comments_params
-    params.require(:comment).permit(:user_id, :cleaning_id, :message)
+    params.require(:comment).permit(:user_id, :cleaning_id, :message, :redirect_path)
   end
 
 end

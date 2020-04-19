@@ -59,6 +59,7 @@
         =f.input :message, label: false, :placeholder => "Leave a comment.", :input_html => {:style=> 'width: 100%'}
         =f.hidden_field :user_id, value: current_user.id
         =f.hidden_field :cleaning_id, value: cleaning.id 
+        =f.hidden_field :redirect_path, value: redirect_path
         //=f.hidden_field :rsvp_hash_key, value: @rsvp_hash_key
         %button.btn.btn-primary.btn-sm{:type => "submit"} Comment
 -else
