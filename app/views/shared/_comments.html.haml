@@ -53,21 +53,35 @@
                       Update
 
 -if current_user
-  = simple_form_for @new_comment do |f|
-    .panel.translucent
-      .panel-body.text-center
-        =f.input :message, label: false, :placeholder => "Leave a comment.", :input_html => {:style=> 'width: 100%'}
-        =f.hidden_field :user_id, value: current_user.id
-        =f.hidden_field :cleaning_id, value: cleaning.id 
-        =f.hidden_field :redirect_path, value: redirect_path
-        //=f.hidden_field :rsvp_hash_key, value: @rsvp_hash_key
-        %button.btn.btn-primary.btn-sm{:type => "submit"} Comment
+  .div.text-center.open_new_comment{id: "new_comment_#{cleaning.id}"}
+    %i.fa.fa-plus-circle 
+    Leave a Comment
+  .div{id: "field_new_comment_#{cleaning.id}", style: "display:none;"}
+    = simple_form_for @new_comment do |f|
+      .panel.translucent
+        .panel-body.text-center
+          =f.input :message, label: false, :placeholder => "Leave a comment.", :input_html => {:style=> 'width: 100%'}
+          =f.hidden_field :user_id, value: current_user.id
+          =f.hidden_field :cleaning_id, value: cleaning.id 
+          =f.hidden_field :redirect_path, value: redirect_path
+          //=f.hidden_field :rsvp_hash_key, value: @rsvp_hash_key
+          %button.btn.btn-primary.btn-sm{:type => "submit"} Comment
 -else
   .div.text-center 
     =link_to "Login to leave a comment.", new_user_session_path, class: "btn btn-primary"
 
 
 :javascript
+
+  //Open Comment Field
+  $(".open_new_comment").click(function(){
+    // Get the id data attribute
+    var id = $(this).attr('id')
+    var field = document.getElementById("field_" + id);
+    field.style.display = 'block';
+    this.style.display = 'none';
+
+  });
 
   //Go into Edit mode
   $(".edit_comment_button").click(function(){
