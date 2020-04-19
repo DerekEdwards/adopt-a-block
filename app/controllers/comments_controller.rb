@@ -23,10 +23,11 @@ class CommentsController < ApplicationController
   def update 
     @comment = Comment.find(params[:comment][:id].to_i)
     @comment.message = params[:comment][:message]
+    @redirect_path = comments_params[:redirect_path] || neighborhood_url(@comment.cleaning.block.neighborhood) 
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to neighborhood_url(@comment.cleaning.block.neighborhood) }
+        format.html { redirect_to @redirect_path}
         #format.json { render :show, status: :ok, location: @comment.commentable }
       else
         format.html { render :edit }

@@ -58,7 +58,7 @@
       .col-md-1
       .col-md-10
         -@block.cleanings.order(time: :desc).each do |cleaning|
-          %hr
+          %hr{style: "border-color:gray;", width:"75%"}
           %h4
             -if cleaning.editable?
               =link_to edit_cleaning_path(cleaning) do
@@ -72,8 +72,8 @@
           =render partial: 'cleaning_photos', locals: {cleaning: cleaning}
           %br
           .row
-            .col-md-2
-            .col-md-8
+            .col-md-3
+            .col-md-6
               =render partial: 'shared/comments', locals: {cleaning: cleaning, redirect_path: block_path(@block)}
 
 
