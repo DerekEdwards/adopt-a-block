@@ -60,7 +60,7 @@
     = simple_form_for @new_comment do |f|
       .panel.translucent
         .panel-body.text-center
-          =f.input :message, label: false, :placeholder => "Leave a comment.", :input_html => {:style=> 'width: 100%'}
+          =f.input :message, label: false, :input_html => {:style=> 'width: 100%'}
           =f.hidden_field :user_id, value: current_user.id
           =f.hidden_field :cleaning_id, value: cleaning.id 
           =f.hidden_field :redirect_path, value: redirect_path

@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_action :confirm_user
+
   def create
     @comment = Comment.create(comments_params)
     @redirect_path = comments_params[:redirect_path] || neighborhood_url(@comment.cleaning.block.neighborhood) 
@@ -22,6 +24,11 @@ class CommentsController < ApplicationController
 
   def update 
     @comment = Comment.find(params[:comment][:id].to_i)
+    unless @comment.user == current_user
+      redirect_to root_url
+      return
+    end
+
     @comment.message = params[:comment][:message]
     @redirect_path = comments_params[:redirect_path] || neighborhood_url(@comment.cleaning.block.neighborhood) 
 
@@ -37,6 +44,12 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def confirm_user
+    unless current_user
+      redirect_to root_url
+    end
+  end
 
   def comments_params
     params.require(:comment).permit(:user_id, :cleaning_id, :message, :redirect_path)
