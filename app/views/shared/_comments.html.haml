@@ -33,22 +33,22 @@
               %div.row
                 %div{id: 'comment_buttons_' + comment.id.to_s}
                   .col-md-5
-                  .col-md-2.panel-text
-                    .message-header-text.edit_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
+                  .col-md-2
+                    .subtle.edit_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
                       %i.fa.fa-edit
                       Edit
                   .col-md-5
                 %div{id: 'edit_comment_buttons_' + comment.id.to_s, :style => "display:none;"}
-                  .col-md-4.panel-text
-                    .message-header-text.delete_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
+                  .col-md-4
+                    .subtle.delete_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
                       %i.fa.fa-trash
                       Delete
-                  .col-md-4.panel-text
-                    .message-header-text.cancel_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
+                  .col-md-4
+                    .subtle.cancel_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
                       %i.fa.fa-close
                       Cancel
-                  .col-md-4.panel-text
-                    .message-header-text.update_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
+                  .col-md-4
+                    .subtle.update_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
                       %i.fa.fa-check-square-o
                       Update
 
