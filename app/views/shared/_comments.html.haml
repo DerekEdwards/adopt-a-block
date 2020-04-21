@@ -53,7 +53,7 @@
                       Update
 
 -if current_user
-  .div.text-center.open_new_comment{id: "new_comment_#{cleaning.id}"}
+  .div.text-center.open_new_comment{id: "new_comment_#{cleaning.id}", style: 'cursor:pointer;'}
     %i.fa.fa-plus-circle 
     Leave a Comment
   .div{id: "field_new_comment_#{cleaning.id}", style: "display:none;"}
@@ -68,7 +68,10 @@
           %button.btn.btn-primary.btn-sm{:type => "submit"} Comment
 -else
   .div.text-center 
-    =link_to "Login to leave a comment.", new_user_session_path, class: "btn btn-primary"
+    =link_to "Login", new_user_session_path(redirect_url: redirect_path), class: "btn btn-primary btn-sm"
+    or
+    =link_to "Sign Up", new_user_registration_path(redirect_url: redirect_path), class: "btn btn-primary btn-sm"
+    to leave a comment.
 
 
 :javascript
