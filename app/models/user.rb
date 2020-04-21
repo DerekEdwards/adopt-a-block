@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :blocks
   has_many :events
+  has_many :comments
   has_and_belongs_to_many :neighborhoods
 
   scope :admin, ->{ where(admin: true) }

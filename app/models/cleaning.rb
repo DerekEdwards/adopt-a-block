@@ -1,6 +1,7 @@
 class Cleaning < ApplicationRecord
 
   belongs_to :block
+  has_many :comments
 
   mount_uploader :before_photo, PhotoUploader
   mount_uploader :after_photo, PhotoUploader

@@ -49,29 +49,38 @@
 = content_tag "div", id: "map", data: {polyline: @block.polyline, color: @block.color, center: @block.center} do
   Loading map...
 
--if @block.cleanings.count >0 
-  .row.text-center
-    %h2
-      Activity on this Block
-    .col-md-1
-    .col-md-10
-      -@block.cleanings.order(time: :desc).each do |cleaning|
-        %hr
-        %h4
-          -if cleaning.editable?
-            =link_to edit_cleaning_path(cleaning) do
-              %i.fa.fa-edit
-          ="Block cleaned on #{cleaning.time.strftime("%a %b %e, %Y")}"
-        .row
-          .col-md-3
-          .col-md-6
-            =cleaning.note
+.row.grey-background
 
-        =render partial: 'cleaning_photos', locals: {cleaning: cleaning}
--else
-  .row.text-center
-    %h2
-      There is no recorded activity on this block.
+  -if @block.cleanings.count >0 
+    .row.text-center
+      %h2
+        Activity on this Block
+      .col-md-1
+      .col-md-10
+        -@block.cleanings.order(time: :desc).each do |cleaning|
+          %hr{style: "border-color:gray;", width:"75%"}
+          %h4
+            -if cleaning.editable?
+              =link_to edit_cleaning_path(cleaning) do
+                %i.fa.fa-edit
+            ="Block cleaned on #{cleaning.time.strftime("%a %b %e, %Y")}"
+          .row
+            .col-md-3
+            .col-md-6
+              =cleaning.note
+
+          =render partial: 'cleaning_photos', locals: {cleaning: cleaning}
+          %br
+          .row
+            .col-md-3
+            .col-md-6
+              =render partial: 'shared/comments', locals: {cleaning: cleaning, redirect_path: block_path(@block)}
+
+
+  -else
+    .row.text-center
+      %h2
+        There is no recorded activity on this block.
 
 
 %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/

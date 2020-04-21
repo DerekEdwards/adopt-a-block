@@ -5,6 +5,7 @@ class BlocksController < ApplicationController
   before_action :confirm_admin, except: [:show, :adopt, :unadopt]
 
   def show
+    @new_comment = Comment.new
     @new_cleaning = Cleaning.new
   end 
 

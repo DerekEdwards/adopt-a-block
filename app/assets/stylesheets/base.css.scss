@@ -12,6 +12,10 @@ html, body {
   color: #426bf4;
 }
 
+.subtle {
+  font-size: small;
+}
+
 .footer {
   background-color: #FFFFFF;
   min-height: 100%;
@@ -163,6 +167,43 @@ h5 {
 
 .strikeout {
   text-decoration: line-through;
+}
+
+.event-comment img {
+  max-width: 100%;
+  max-height: 800px;
+}
+
+.event-comment iframe {
+  max-width: 100%;
+  max-height: 800px;
+}
+
+.translucent {
+  opacity: 0.9;
+}
+
+.translucent {
+  opacity: 0.9;
+}
+
+.panel-text {
+  color: #000 !important;
+}
+
+.message-header-text {
+  color: #000 !important;
+  font-size: 14px;
+}
+
+.message-body-text {
+  color: #000 !important;
+  font-size: 18px;
+}
+
+.message-time-text {
+  color: #000 !important;
+  font-size: 10px;
 }
 
 

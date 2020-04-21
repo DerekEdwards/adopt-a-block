@@ -1,0 +1,142 @@
+-cleaning.comments.each do |comment|
+  .panel.translucent{id: 'global_comment_' + comment.id.to_s}
+    .panel-body.event-comment.text-center 
+      %div.row
+        %div
+          .col-md-3{style: "valign=middle;"}
+            //-unless comment.user.avatar_url.blank?
+            //  %img.img-circle{src: comment.user.avatar_url, style: "height: 60px; width: 60px;"}
+            %div.row
+              .message-header-text
+                =comment.user.name
+            %div.row
+              .message-time-text
+                =comment.created_at.strftime("%B %-d, %Y")
+            %div.row
+              .message-time-text
+                =comment.created_at.strftime("%-I:%M%p")
+          .col-md-9  
+            %div{id: 'comment_' + comment.id.to_s}
+              .col-md-12.text-left
+                .message-body-text
+                  -unless comment.message.blank?
+                    =comment.html_message.html_safe
+                    //=comment.body_html || comment.body.html_safe
+            %div{id: 'comment_field_' + comment.id.to_s, :style => "display:none;"}
+              = simple_form_for comment, :url => url_for(:action => 'update', :controller => 'comments'), :method => 'patch', html: { id: 'comment_form_' + comment.id.to_s}, :authenticity_token => true, :remote => true do |f| 
+                =f.input :message, label: false, :input_html => {:style => 'width: 100%', :value => comment.message.gsub("<p>","").gsub("</p>","")}
+                =f.hidden_field :id, value: comment.id
+
+
+            -if comment.user == current_user 
+              %br
+              %div.row
+                %div{id: 'comment_buttons_' + comment.id.to_s}
+                  .col-md-5
+                  .col-md-2
+                    .subtle.edit_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
+                      %i.fa.fa-edit
+                      Edit
+                  .col-md-5
+                %div{id: 'edit_comment_buttons_' + comment.id.to_s, :style => "display:none;"}
+                  .col-md-4
+                    .subtle.delete_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
+                      %i.fa.fa-trash
+                      Delete
+                  .col-md-4
+                    .subtle.cancel_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
+                      %i.fa.fa-close
+                      Cancel
+                  .col-md-4
+                    .subtle.update_comment_button{"data-id" => comment.id.to_s, :style => 'cursor:pointer;'}
+                      %i.fa.fa-check-square-o
+                      Update
+
+-if current_user
+  .div.text-center.open_new_comment{id: "new_comment_#{cleaning.id}", style: 'cursor:pointer;'}
+    %i.fa.fa-plus-circle 
+    Leave a Comment
+  .div{id: "field_new_comment_#{cleaning.id}", style: "display:none;"}
+    = simple_form_for @new_comment do |f|
+      .panel.translucent
+        .panel-body.text-center
+          =f.input :message, label: false, :input_html => {:style=> 'width: 100%'}
+          =f.hidden_field :user_id, value: current_user.id
+          =f.hidden_field :cleaning_id, value: cleaning.id 
+          =f.hidden_field :redirect_path, value: redirect_path
+          //=f.hidden_field :rsvp_hash_key, value: @rsvp_hash_key
+          %button.btn.btn-primary.btn-sm{:type => "submit"} Comment
+-else
+  .div.text-center 
+    =link_to "Login", new_user_session_path(redirect_url: redirect_path), class: "btn btn-primary btn-sm"
+    or
+    =link_to "Sign Up", new_user_registration_path(redirect_url: redirect_path), class: "btn btn-primary btn-sm"
+    to leave a comment.
+
+
+:javascript
+
+  //Open Comment Field
+  $(".open_new_comment").click(function(){
+    // Get the id data attribute
+    var id = $(this).attr('id')
+    var field = document.getElementById("field_" + id);
+    field.style.display = 'block';
+    this.style.display = 'none';
+
+  });
+
+  //Go into Edit mode
+  $(".edit_comment_button").click(function(){
+       // Get the id data attribute
+    var id = $(this).data("id");
+    var button_div = document.getElementById('comment_buttons_' + id);
+    button_div.style.display = 'none';
+
+    var comment_area = document.getElementById('comment_' + id);
+    comment_area.style.display = 'none';
+
+    var comment_field = document.getElementById('comment_field_' + id);
+    comment_field.style.display = 'block';
+     
+    var edit_button_div = document.getElementById('edit_comment_buttons_' + id);
+    edit_button_div.style.display = 'block';
+  });
+
+  //Delete a comment
+  $(".delete_comment_button").click(function(){
+       // Get the id data attribute
+    var id = $(this).data("id");
+
+    var global_div = document.getElementById('global_comment_' + id)
+    global_div.style.display = 'none';
+
+    $.ajax({
+      type: 'DELETE',
+      url: '#{root_url}' + 'comments/' + id + '/delete'
+    });
+  });
+
+  // Cancel editing a comment
+  $(".cancel_comment_button").click(function(){
+       // Get the id data attribute
+    var id = $(this).data("id");
+    var button_div = document.getElementById('comment_buttons_' + id);
+    button_div.style.display = 'block';
+
+    var comment_area = document.getElementById('comment_' + id);
+    comment_area.style.display = 'block';
+
+    var comment_field = document.getElementById('comment_field_' + id);
+    comment_field.style.display = 'none';
+     
+    var edit_button_div = document.getElementById('edit_comment_buttons_' + id);
+    edit_button_div.style.display = 'none';
+  });
+
+  // Update a comment
+  $(".update_comment_button").click(function(){
+    var id = $(this).data("id");
+    var comment_form = document.getElementById('comment_form_' + id);
+    comment_form.submit();
+  });

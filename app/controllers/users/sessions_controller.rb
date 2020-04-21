@@ -7,12 +7,26 @@ class Users::SessionsController < Devise::SessionsController
   def new
     @block_id = params[:block_id]
     @neighborhood_id = params[:neighborhood_id]
+    @redirect_url = params[:redirect_url]
     super
   end
 
   # POST /resource/sign_in
   def create
-    super
+    ##############
+    self.resource = warden.authenticate!(auth_options)
+    set_flash_message!(:notice, :signed_in)
+    sign_in(resource_name, resource)
+    yield resource if block_given?
+
+    if params[:redirect_url]
+      redirect_path = params[:redirect_url]
+    else
+      redirect_path = after_sign_in_path_for(resource)
+    end
+
+    respond_with resource, location: redirect_path #after_sign_in_path_for(resource)
+    ##############
    
     if params[:block_id]
       @block = Block.find(params[:block_id])
@@ -24,6 +38,7 @@ class Users::SessionsController < Devise::SessionsController
       @neighborhood = Neighborhood.find(params[:neighborhood_id])
       @neighborhood.add_follower current_user
     end
+
   end
 
   # DELETE /resource/sign_out

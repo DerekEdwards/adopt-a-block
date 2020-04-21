@@ -1,7 +1,7 @@
 .col-md-2
 .col-md-4
   %h2 Sign up
-  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name, block_id: @block_id, neighborhood_id: @neighborhood_id)) do |f|
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name, block_id: @block_id, neighborhood_id: @neighborhood_id, redirect_url: @redirect_url)) do |f|
     = f.error_notification
     .form-inputs
       = f.input :email, required: true, autofocus: true
