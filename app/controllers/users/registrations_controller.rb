@@ -16,10 +16,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    resource.save
-    resource.reload 
-    
-    if params[:redirect_url]
+    success = resource.save
+
+    # TODO: This was a hasty bug fix, we should give much better alerts around signing up.
+    if !success 
+      redirect_path = root_url
+    elsif params[:redirect_url]
       redirect_path = params[:redirect_url]
     else
       redirect_path = after_sign_in_path_for(resource)
@@ -42,15 +44,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with resource, location: redirect_path
     end
 
-    if params[:block_id]
-      @block = Block.find(params[:block_id])
-      @block.adopt current_user
-      @block.save
-    end
+    if success 
+      if params[:block_id]
+        @block = Block.find(params[:block_id])
+        @block.adopt current_user
+        @block.save
+      end
 
-    if params[:neighborhood_id]
-      @neighborhood = Neighborhood.find(params[:neighborhood_id])
-      @neighborhood.add_follower current_user
+      if params[:neighborhood_id]
+        @neighborhood = Neighborhood.find(params[:neighborhood_id])
+        @neighborhood.add_follower current_user
+      end
     end
 
   end
