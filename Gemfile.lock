@@ -344,7 +344,8 @@ GEM
       activesupport (>= 3.0)
       phony (> 2.15)
     public_suffix (3.0.2)
-    puma (3.12.4)
+    puma (4.3.8)
+      nio4r (~> 2.0)
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
@@ -517,7 +518,7 @@ DEPENDENCIES
   mini_magick
   pg (>= 0.18, < 2.0)
   phony_rails
-  puma (~> 3.12)
+  puma (~> 4.3)
   rails (~> 5.1.5)
   rails-controller-testing
   rb-readline
